@@ -1,0 +1,530 @@
+// Place all the styles related to the word controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// テスト画面
+a:focus {
+  outline: none;
+}
+
+
+#container {
+  width: 100%;
+}
+
+.next{
+  width: 300px;
+  height: 34px;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.fa-chevron-circle-right{
+  color: rgb(82, 81, 81);
+}
+
+.header-test {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 23px;
+  grid-template-columns: 50px 50px 100px 50px 1fr;
+}
+
+.number {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.favorite-button{
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.search {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#speakbtn{
+  grid-row: 1;
+  grid-column: 5;
+}
+
+/* クイズのすべてを管理する親要素 */
+.quiz_area{
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+
+
+/* 問題文 */
+.quiz_area .quiz_question{
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 30px
+}
+
+.quiz_area .quiz_ans_area {
+  position: relative;
+}
+
+/* 以下クイズの選択肢のデザイン */
+.word_mean {
+  display: block;
+  width: 300px;
+  background: rgb(255, 255, 255); /* 背景色 */
+  color: rgb(0, 0, 0); /* 文字色 */
+  padding: 16px 40px; /* 上下の余白、左右の余白 */
+  text-decoration: none; /* デフォルトで入るリンクの下線を消す */
+  border:1px solid #CCC;
+  border-radius: 30px; /* 角を丸くする */
+  transition-property: background-color;
+  -webkit-transition-property: background-color;
+  transition-duration: .5s;
+  -webkit-transition-duration: .5s;
+}
+.word_mean:hover {
+  background-color: #CCC;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.choice_box {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.question{
+  text-align: center;
+}
+
+.q_word{
+  margin: 0;
+}
+
+#speakbtn,.speakbtn_index,.filter-btn {
+  border: none;  /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent; /* 背景の灰色を消す */
+  cursor: pointer;
+}
+
+
+/* 回答後に上に被せてタップできなくするための要素（デフォルト非表示） */
+.quiz_area .quiz_area_bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0);
+    display: none;
+    color: #FFF;
+    text-align: center;
+}
+
+
+
+/* 画面に〇、×を表示するための要素（デフォルト非表示、回答後に一時的に表示） */
+.quiz_area .quiz_area_icon{
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    color: red;
+    display: none;
+    font-size: 10em;
+    font-weight: bold;
+    -webkit-text-stroke: 4px #FFF;
+}
+
+/* .trueまたは.falseのクラスが付与されたら表示するものとみなす */
+.quiz_area .quiz_area_icon.true, .quiz_area .quiz_area_icon.false{
+    display: block;
+}
+
+/* .trueは正解（〇を表示） */
+.quiz_area .quiz_area_icon.true:before{
+    content: '〇';
+    color: red;
+    opacity: 0.7;
+}
+/* .falseは不正解（×を表示） */
+.quiz_area .quiz_area_icon.false:before{
+    content: '×';
+    color: blue;
+    opacity: 0.7;
+}
+
+
+
+.result{
+  display: inline-block;
+}
+
+
+// 単語新規作成-------------------------------------------------------------------------------------------------------------------
+
+.create_box{
+  position: relative;
+  width: 100%;
+  height: 460px;
+}
+
+.word_create{
+  position: absolute;
+  top: 53%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 500px;
+}
+
+.word_create h1{
+  margin: 50px;
+  font-family: Raleway, sans-serif;
+  font-size: 50px;
+}
+
+.new_word_submit{
+  margin: 30px;
+  background-color: #e27441;
+  border-color:rgb(240, 147, 104);
+  border-bottom: 2px solid #be783f;
+  border-right: 2px solid #c77e43;
+  color: #fff;
+  font-family: Raleway, sans-serif;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 16px;
+}
+
+.create_field{
+  display: inline-block;
+  margin: 0 25px;
+  vertical-align: top;
+}
+
+.text_field{
+  border: none;
+	border-bottom: 2px solid #1b2538;
+}
+
+.text_field:focus{
+  outline: none;
+}
+
+.error {
+  color: red;
+  margin: 0;
+}
+
+.error_box {
+  height: 80px;
+}
+
+.word_create select{
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #000000;
+  width: 180px;
+}
+
+.pull_down{
+  margin-bottom: 50px;
+}
+// ------------------------------------------------------------------------------------------------------------------------
+
+// 単語一覧
+.index_table {
+    display: block;
+    overflow-y: scroll;
+    height: 430px;
+    width: 100%;
+    border-collapse: collapse;
+}
+.index_table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: white;
+    border-top: white;
+    font-weight: lighter;
+    height: 50px;
+}
+
+.filter-btn {
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+#narrow-down-search {
+  float: right;
+  display: flex;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+#narrow-down {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+
+
+.yellow {
+  color: #FFFF00;
+  cursor: pointer;
+}
+
+.clear {
+  color: #CCC;
+  cursor: pointer;
+}
+
+
+
+// テスト結果
+#result_circle {
+  margin: 50px;
+  width: 250px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+// ---------------------------------------------------------------------------------------
+.btn-square-slant {
+  display: inline-block;
+  margin: 25px;
+  position: relative;
+  padding: 0.5em 1.4em;
+  text-decoration: none;
+  background: #7a837f;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 5px #3d3f3d;/*ボタン色より暗めに*/
+  border-right: solid 5px #4d534d;/*ボタン色より暗めに*/
+}
+
+.btn-square-slant:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.btn-square-slant:before {  
+  content: " ";
+  position: absolute;
+  bottom: -5px;
+  left: -1px;
+  width: 0;
+  height: 0;
+  border-width: 0 6px 6px 0px;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom-color: #FFF;
+}
+
+.btn-square-slant:after {  
+  content: " ";
+  position: absolute;
+  top: -1px;
+  right: -5px;
+  width: 0;
+  height: 0;
+  border-width: 0px 6px 6px 0px;
+  border-style: solid;
+  border-color: #FFF;
+  border-bottom-color: transparent;
+}
+
+.btn-square-slant:active {
+  /*ボタンを押したとき*/
+  border:none;
+  -webkit-transform: translate(6px,6px);
+  transform: translate(6px,6px);
+}
+
+.btn-square-slant:active:after, .btn-square-slant:active:before {
+  content: none;/*ボタンを押すと線が消える*/
+}
+// ---------------------------------------------------------------------------------------
+
+.result_box{
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 120px;
+  text-align: center;
+}
+
+.result_box p {
+  font-family: 'Small Fonts',sans-serif;
+  font-size: 80px;
+}
+
+.maru {
+  font-size: 250%;
+  font-weight: lighter;
+  color: red;
+  display: inline-block;
+}
+
+.batu {
+  font-size: 250%;
+  font-weight: bold;
+  color: blue;
+  display: inline-block;
+}
+
+
+.back_index {
+  text-align: center;
+  width: 100%;
+}
+
+.link_index {
+  background: rgb(243, 128, 75);
+  color: white;
+  display: block;
+  padding: 30px 0;
+  text-decoration: none;
+  transition-property: background-color;
+  -webkit-transition-property: background-color;
+  transition-duration: .5s;
+  -webkit-transition-duration: .5s;
+}
+
+.link_index:hover {
+  background: rgb(240, 147, 104);
+  color: white;
+  text-decoration: none;
+}
+
+// 単語テスト選択画面
+.choice_area {
+  position: relative;
+  width: 100%;
+  height: 460px;
+}
+
+.select_box {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(-50%);
+  margin: auto;
+}
+
+.notice {
+  width: 390px;
+  margin: 10px auto;
+  height: 24px;
+}
+
+.notice i {
+  float: left;
+  cursor: pointer;
+  color:rgb(233, 236, 10);
+}
+
+.notice p {
+  display: none;
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.hinsi-box {
+  height: 70px;
+}
+
+
+.test_btn {
+  padding: 5px;
+  margin: 0 15px;
+  display: none;
+  position: relative;
+  z-index: 2;
+  background-color: #e27441;
+  border: 2px solid #e27441;
+  color: #fff;
+  line-height: 50px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.test_btn:hover {
+  background-color: #fff;
+  border-color: #e27441;
+  color: #e27441;
+  text-decoration: none;
+}
+
+
+.btn-animation-02 {
+  display: inline-block;
+  width: 400px;
+  border: 2px solid #e27441;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 24px;
+  font-weight: bold;
+  background-color: #e27441;
+  color: #e27441;
+  text-decoration: none;
+  border-radius: 6px;
+  position: relative;
+}
+
+
+.btn-animation-02 span {
+  position: relative;
+  z-index: 1;
+}
+
+
+.btn-animation-02::before,
+.btn-animation-02::after {
+  content: "";
+  display: block;
+  background-color: #FFF;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: .2s;
+}
+
+
+.btn-animation-02::before {
+  left: 0;
+}
+
+.btn-animation-02::after {
+  right: 0;
+}
+
+
+.btn-animation-02:hover:before,
+.btn-animation-02:hover:after {
+  width: 0;
+  background-color: #FFF;
+}
+
+
+.btn-animation-02:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+
+

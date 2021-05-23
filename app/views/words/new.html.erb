@@ -1,0 +1,29 @@
+<% model_reset %>
+<div class="create_box">
+  <div class="word_create">
+    <h1>Create Word</h1>
+    <%= form_with model: @word, local: true do |f| %>
+      <div class="create_field">
+      <%= f.text_field :word, :placeholder => "word", :class => 'text_field', :value => @word.word %>
+      <div class="error_box">
+      <% if @word.errors.include?(:word) %>
+       <p class="error"><%= @word.errors.full_messages_for(:word).first %></p>
+      <% end %>
+      </div>
+      </div>
+
+      <div class="create_field">
+      <%= f.text_field :meaning, :placeholder => "meaning", :class => 'text_field', :value => @word.meaning %>
+      <div class="error_box">
+      <% if @word.errors.include?(:meaning) %>
+       <p class="error"><%= @word.errors.full_messages_for(:meaning).first %></p>
+      <% end %>
+      </div>
+      </div>
+
+      <div class="pull_down"><%= f.select :part_of_speech, options_for_select([["動詞", "動詞"],["名詞", "名詞"],["副詞", "副詞"],["形容詞", "形容詞"],["熟語", "熟語"]], params[:part_of_speech]) %></div>
+      <%= f.hidden_field :user_id, :value => @current_user.id %>
+      <div class="create_button"><%= f.submit 'CREATE', :class => 'new_word_submit' %></div>
+    <% end %>
+  </div>
+</div>

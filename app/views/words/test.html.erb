@@ -1,0 +1,53 @@
+<div id="container"></div>
+<div class="header-test">
+  <p class="number"><%= @number %>/5</p>
+  <div class="favorite-button">
+  <% if @random.favorite %>
+    <div class=<%= @random.id %>><i class="fas fa-star yellow"></i></div>
+  <% else %>
+    <div class=<%= @random.id %>><i class="fas fa-star clear"></i></div>
+  <% end %>
+  </div>
+  <a href="https://www.google.com/search?q=<%= @random.word %>" class="search" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a>
+  <button id="speakbtn"><i class="fas fa-volume-up fa-lg"></i></button>
+</div>
+<div class="quiz_area">
+    <div class="quiz_question">
+      <div class="question">
+        <p class="q_word"><%= @random.word %></p>
+      </div>
+    </div>
+    <div class="next"></div>
+    <div class="quiz_ans_area">
+        <% @words_meaning.each do |meaning| %>
+          <div class="choice_box"><a href="#!" class="word_mean"><%= meaning %></a></div>
+        <% end %>
+      <div class="quiz_area_bg"></div>
+    </div>
+    <div class="quiz_area_icon"></div><!-- 追加 マルorバツを中央に表示させるエリア -->
+</div>
+
+<script>
+$(function() {
+    var q_word = $('.q_word').text();
+    const uttr = new SpeechSynthesisUtterance();
+    uttr.text = q_word;
+    uttr.lang = "en-US";
+    speechSynthesis.speak(uttr);
+});
+
+$(function(){
+  var bar = new ProgressBar.Line("#container", {
+    strokeWidth: 0.7,
+    easing: 'easeInOut',
+    duration: 800,
+    color: '#FFCC33',
+    trailColor: '#eee',
+    trailWidth: 0.7,
+  });
+  bar.set((<%= @number %>-1)*0.2);
+  bar.animate(<%= @number %>*0.2); 
+})
+
+
+</script>

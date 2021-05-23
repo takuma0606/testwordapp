@@ -1,0 +1,98 @@
+
+<div class="result_box">
+  <p id="arch"><%= result_pop(result_number) %></p>
+  <div id="result_circle"></div>
+  <div class="again_box">
+    <%= link_to  "Again", __send__(@obj.path, name: @obj.name, path: @obj.path, mark: "mark"), {class: "btn-square-slant"} %>
+  </div>
+</div>
+
+<table class="table">
+  <tbody>
+  <% @results.each_with_index do |result,index| %>
+    <tr>
+      <th scope="row" class="align-middle"><%= index + 1 %></th>
+      <% word = Word.with_deleted.find_by(id: result.q_id) %>
+      <% if word.favorite %>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
+      <% else %>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
+      <% end %>
+
+      <% if Word.exists?(id: result.q_id) %>
+        <td class="align-middle">
+        <%= link_to "Learned", "/words/#{result.q_id}/learned", {method: :post, class: "learned_btn"} %>
+        </td>
+      <% else %>
+        <td class="align-middle">
+        <%= link_to "Forgot", "/words/#{result.q_id}/forgot", {method: :post, class: "learned_btn"} %>
+        </td> 
+      <% end %>
+
+      <td class="align-middle"><p class='q_word word_<%= result.id %>'><%= result.q_word %></p></td>
+      <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= result.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
+
+      <% if result.answer == result.solution %>
+        <td class="align-middle" style="text-align: center"><div class="maru">〇</div></td>
+      <% else %>
+        <td class="align-middle" style="text-align: center"><div class="batu">✕</div></td>
+      <% end %>
+      <td class="align-middle">
+        <div>(回答)<%= result.answer %></div>
+        <div>(解答)<%= result.solution %></div>
+      </td>
+      <td class="align-middle"><a href="https://www.google.com/search?q=<%= result.q_word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div class="back_index"><%= link_to "単語一覧に戻る", words_path, {class: "link_index"} %></div>
+
+
+<script>
+$(function() {
+  var bar = new ProgressBar.SemiCircle("#result_circle", {
+  strokeWidth: 6,
+  color: '#FFEA82',
+  trailColor: '#eee',
+  trailWidth: 1,
+  easing: 'easeInOut',
+  duration: 1000,
+  svgStyle: null,
+  text: {
+    value: '',
+    alignToBottom: true
+  },
+  from: {color: '#FFEA82'},
+  to: {color: '#ED6A5A'},
+  // Set default step function for all animate calls
+  step: (state, bar) => {
+    bar.path.setAttribute('stroke', state.color);
+    var value = Math.round(bar.value() * 100);
+    if (value === 0) {
+      bar.setText('');
+    } else {
+      bar.setText(value);
+    }
+
+    bar.text.style.color = state.color;
+  }
+});
+bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+bar.text.style.fontSize = '2rem';
+
+bar.animate(<%= result_number %>*0.2);  // Number from 0.0 to 1.0
+$('#arch').arctext({radius: 400})
+});
+
+$(function () {
+  if (<%= result_number %> == 5){
+    document.querySelector("#excellent").play();
+  }else if(<%= result_number %> == 3 || <%= result_number %> == 4 ) {
+    document.querySelector("#good").play();
+  }else{
+    document.querySelector("#bad").play();
+  }
+});
+</script>
+

@@ -1,0 +1,101 @@
+<% model_reset %>
+
+<button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal1">
+<span class="fa-stack">
+  <i class="far fa-square fa-stack-2x"></i>
+  <i class="fas fa-filter fa-stack-1x"></i>
+</span>
+</button>
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">条件検索</div>
+            <div class="modal-body">
+            <%= form_with url: words_path, method: :get, local: true do |f| %>
+              <%= f.collection_select :search, Word.with_deleted.where(user_id: @current_user.id).select(:part_of_speech).distinct, :part_of_speech, :part_of_speech, {selected: params[:search], include_blank: '指定なし'} %>
+              <%= f.label :learned, "覚えた単語を表示" %>
+              <%= f.check_box :learned, {}, true, nil %>
+              <%= f.label :favorited, "お気に入り" %>
+              <%= f.check_box :favorited, {}, true, nil %>
+              <%= f.submit "絞り込み" %>
+            <% end %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal3">
+<span class="fa-stack">
+  <i class="far fa-square fa-stack-2x"></i>
+  <i class="far fa-trash-alt fa-stack-1x"></i>
+</span>
+</button>
+
+
+<div id="narrow-down-search">
+<input type="text" id="search-field" placeholder="search">
+<input type="button" value="&#xf002;" id="narrow-down">
+</div>
+
+<%= form_with url: destroy_all_words_path, method: :delete, local: true do |f| %>
+<table class="table index_table table-hover">
+<thead>
+  <tr>
+    <th scope="col" class="align-middle" style="width: 5%;"><input type="checkbox" name="allchecked" id="all" ></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 10%;"></th>
+    <th scope="col" class="align-middle" style="width: 10%;">品詞</th>
+    <th scope="col" class="align-middle" style="width: 15%;">単語</th>
+    <th scope="col" class="align-middle" style="width: 10%;">発音</th>
+    <th scope="col" class="align-middle" style="width: 35%;">意味</th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle"></th>
+  </tr>
+</thead>
+  <tbody id="boxes">
+    <% @words.each do |word| %>
+    <tr style="height: 60px;">
+      <td class="align-middle"><%= f.check_box :deletes, { multiple: true }, checked_value = word.id, unchecked_value = nil %></td>
+      <% if word.favorite %>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
+      <% else %>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
+      <% end %>
+      <% if word.deleted_at == nil %>
+        <td class="align-middle"><%= link_to "Learned", "/words/#{word.id}/learned", method: :post, class: "forgot_btn" %></td>
+      <% else %>
+        <td class="align-middle"><%= link_to "Forgot", "/words/#{word.id}/forgot", method: :post, class: "forgot_btn" %></td>
+      <% end %>
+      <td class="align-middle"><p style="margin: 0;"><%= best_in_place word, :part_of_speech, :as => :input, :html_attrs => { size: 2 } %></p></td>
+      <td class="align-middle"><p class='word_<%= word.id %>' style="margin: 0;"><%= best_in_place word, :word, :as => :input, :html_attrs => { size: 5 } %></p></td>
+      <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= word.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
+      <td class="align-middle"><%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></td>
+      <td class="align-middle">
+        <%= link_to word_path(id: word.id) , method: :delete, data: {confirm: "本当に削除しますか？"} do %>
+          <i class="fas fa-trash-alt" style="color: black;"></i>
+        <% end %>
+      </td>
+      <td class="align-middle"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i>
+      </a></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">チェックしたデータを一括削除しますか？</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.submit "OK", class: " btn btn-primary" %>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
