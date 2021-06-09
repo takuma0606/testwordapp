@@ -26,5 +26,6 @@ production:
   encoding: utf8
   database: d4f7d48c37t15d
   port: 5432
+  host: ec2-3-89-0-52.compute-1.amazonaws.com
   username: jirryemjignpgw
   password: 85e2c39edc46ee6b6801a6600824c5c28144f56acd81a0a1aea4100d422e7e50
