@@ -13,7 +13,7 @@ end
 
 # 本番環境ではPostgresqlを使う
 group :production do
-  gem 'pg', '~> 1.2.3'
+  gem 'pg'
 end
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
