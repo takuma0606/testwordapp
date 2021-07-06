@@ -17,9 +17,9 @@
 
 .menu_box {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
 }
 
 .menu_box h1 {
@@ -27,7 +27,7 @@
   text-align: center;
   font-size: 5.625rem;
   font-family: "Poiret One", cursive;
-  font-weight: bold;
+  font-weight: bolder;
   letter-spacing: 1rem;
   margin-bottom: 70px;
 }
