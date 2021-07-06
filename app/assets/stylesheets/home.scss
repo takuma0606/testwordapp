@@ -2,55 +2,45 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .menu {
   position: relative;
   width: 100%;
-  height: 485px;
+  min-height: 100%;
+  padding-top: 40px;
+  background-image: url(word.jpg);
+  background-position: center;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.445);
+  background-blend-mode: lighten;
+  box-sizing: border-box;
 }
 
 .menu_box {
   position: absolute;
   top: 50%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  transform: translateY(-50%);
-  margin: auto;
-}
-
-.bg_image {
-  height: 100%;
-  width: 100%;
-  background-image: url(word.jpg);
-  background-size: cover;
-}
-
-.bg_mask {
-  height: 100%;
-  background: rgba(255,255,255,0.5);
-}
-
-.btn-field3 {
-  display: inline-block;
-  margin-bottom: 50px;
-}
-
-.btn-field {
-  display: inline-block;
-  margin-bottom: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .menu_box h1 {
-  color: rgb(0, 0, 0);
-  font-size: 90px;
-  margin-top: 80px;
-  margin-bottom: 100px;
-  letter-spacing: 20px;
-  font-family: 'Poiret One', cursive;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 5.625rem;
+  font-family: "Poiret One", cursive;
   font-weight: bold;
+  letter-spacing: 1rem;
+  margin-bottom: 70px;
+}
+
+.btn-field-1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.btn-field-2 {
+  display: flex;
+  justify-content: space-between;
 }
 
 a.btn--orange {
@@ -66,8 +56,8 @@ a.btn--orange:focus {
   outline: none;
 }
 a.btn--shadow {
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 a.create {
@@ -99,5 +89,22 @@ a.test:hover {
   border-bottom: 2px solid #3f4492;
 }
 
+@media screen and (max-width: 700px) {
+  .menu_box h1 {
+    font-size: 3.75rem;
+    white-space: normal;
+  }
 
+  .btn-field-1 {
+    margin-bottom: 1rem;
+  }
 
+  .btn-field-2 {
+    flex-direction: column;
+  }
+
+  .btn-field-2 li {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+}

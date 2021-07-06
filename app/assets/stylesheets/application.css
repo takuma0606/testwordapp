@@ -14,56 +14,115 @@
  *= require_self
  */
 
-/* ヘッダー */
-.header{
-  background-color: black;
+html {
+  height: 100%;
+}
+
+body {
   margin: 0;
+  height: 100%;
+}
+
+div,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.wrapper {
+  padding: 0 20px;
+  max-width: 1360px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------------------------------------
+ヘッダー
+------------------------------------------------------------------------------ */
+
+header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: black;
+  z-index: 10;
+}
+
+#header {
   height: 40px;
-  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
-.top {
+#header a {
   color: white;
+}
+
+#header a:hover {
   text-decoration: none;
-  font-size: 30px;
+}
+
+#site-title {
+  text-align: center;
+  width: 20%;
+}
+
+#site-title a {
+  white-space: nowrap;
+  font-size: 1.875rem;
   letter-spacing: 3px;
-  font-family: 'Poiret One', cursive;
+  font-family: "Poiret One", cursive;
 }
 
-.top:hover{
-  text-decoration: none;
+.right_nav,
+.left_nav {
+  width: 30%;
+  display: flex;
+  margin: 0;
+}
+
+.right_nav {
+  justify-content: flex-end;
+}
+
+#header li {
+  margin: 0 20px 0;
   color: white;
 }
 
-.nav{
-  text-decoration: none;
-  color: rgb(201, 198, 198);
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.nav:hover{
-  text-decoration: none;
-  color: white;
+#header li a:hover {
   border-bottom: 1px solid white;
 }
 
-
-.right_nav {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 0;
+@media screen and (max-width: 900px) {
+  .left_nav {
+    display: none;
+  }
+  .right_nav {
+    width: 215px;
+  }
 }
 
-.left_nav {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 0;
+@media screen and (max-width: 450px) {
+  .left_nav {
+    display: none;
+  }
+  .right_nav {
+    width: 215px;
+  }
+
+  #header li {
+    margin: 0;
+  }
+
+  #header li:first-of-type {
+    margin-right: 20px;
+  }
 }
-
-

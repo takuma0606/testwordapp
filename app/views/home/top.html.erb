@@ -2,28 +2,26 @@
 <% List.where(user_id: @current_user.id).destroy_all %>
 <% Result.where(user_id: @current_user.id).destroy_all %>
 <% Partofspeech.where(user_id: @current_user.id).destroy_all %>
-<div class="bg_image">
-<div class="bg_mask">
 <div class="menu">
   <div class="menu_box">
     <h1>Word Test</h1>
-    <div class="btn-field"><%= link_to 'Index', words_path, {class: "btn btn--orange btn--cubic btn--shadow index", onfocus: "this.blur();"} %></div>
-    <div class="btn-field"><%= link_to 'Create', new_word_path, {class: "btn btn--orange btn--cubic btn--shadow create", onfocus: "this.blur();"} %></div>
-    <div class="btn-field2"><%= link_to 'Test', choice_test_words_path, {class: "btn btn--orange btn--cubic btn--shadow test", onfocus: "this.blur();"} %></div>
+    <ul class="btn-field-1">
+      <li><%= link_to 'Index', words_path, {class: "btn btn--orange btn--cubic btn--shadow index", onfocus: "this.blur();"} %></li>
+    </ul>
+    <ul class="btn-field-2">
+      <li><%= link_to 'Create', new_word_path, {class: "btn btn--orange btn--cubic btn--shadow create", onfocus: "this.blur();"} %></li>
+      <li><%= link_to 'Test', choice_test_words_path, {class: "btn btn--orange btn--cubic btn--shadow test", onfocus: "this.blur();"} %></li>
+    </ul>
   </div>
-</div>
-</div>
 </div>
 <% else %>
-<div class="bg_image">
-<div class="bg_mask">
 <div class="menu">
   <div class="menu_box">
     <h1>Word Test</h1>
-    <div class="btn-field3"><%= link_to 'Signup', "/signup", {class: "btn btn--orange btn--cubic btn--shadow index", onfocus: "this.blur();"} %></div>
-    <div class="btn-field3"><%= link_to 'Login', "/login", {class: "btn btn--orange btn--cubic btn--shadow create", onfocus: "this.blur();"} %></div>
-  </div>
-</div>
-</div>
+    <ul class="btn-field-2">
+      <li><%= link_to 'Signup', "/signup", {class: "btn btn--orange btn--cubic btn--shadow index", onfocus: "this.blur();"} %></li>
+      <li><%= link_to 'Login', "/login", {class: "btn btn--orange btn--cubic btn--shadow create", onfocus: "this.blur();"} %></li>
+    </ul>
+   </div>
 </div>
 <% end %>

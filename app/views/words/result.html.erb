@@ -1,4 +1,4 @@
-
+<div class="result-area">
 <div class="result_box">
   <p id="arch"><%= result_pop(result_number) %></p>
   <div id="result_circle"></div>
@@ -7,47 +7,47 @@
   </div>
 </div>
 
-<table class="table">
+<table class="table result-table">
   <tbody>
   <% @results.each_with_index do |result,index| %>
     <tr>
-      <th scope="row" class="align-middle"><%= index + 1 %></th>
+      <th scope="row" class="align-middle"　style="width: 5%;"><%= index + 1 %></th>
       <% word = Word.with_deleted.find_by(id: result.q_id) %>
       <% if word.favorite %>
-        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
+        <td class="align-middle" style="width: 5%;"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
       <% else %>
-        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
+        <td class="align-middle" style="width: 5%;"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
       <% end %>
 
       <% if Word.exists?(id: result.q_id) %>
-        <td class="align-middle">
-        <%= link_to "Learned", "/words/#{result.q_id}/learned", {method: :post, class: "learned_btn"} %>
+        <td class="align-middle" style="width: 5%;">
+        <%= link_to "覚", "/words/#{result.q_id}/learned", {method: :post, class: "learned_btn"} %>
         </td>
       <% else %>
-        <td class="align-middle">
-        <%= link_to "Forgot", "/words/#{result.q_id}/forgot", {method: :post, class: "learned_btn"} %>
+        <td class="align-middle" style="width: 5%;">
+        <%= link_to "忘", "/words/#{result.q_id}/forgot", {method: :post, class: "learned_btn"} %>
         </td> 
       <% end %>
 
-      <td class="align-middle"><p class='q_word word_<%= result.id %>'><%= result.q_word %></p></td>
-      <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= result.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
+      <td class="align-middle" style="width: 70%;">
+        <p class='q_word word_<%= result.id %>'><%= result.q_word %></p>
+        <p class="word-mean"><%= result.solution %></p>
+      </td>
+      <td class="align-middle" style="width: 5%;"><button  type="button" class="speakbtn_index" value=<%= result.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
 
       <% if result.answer == result.solution %>
-        <td class="align-middle" style="text-align: center"><div class="maru">〇</div></td>
+        <td class="align-middle" style="text-align: center; width: 5%;"><div class="maru">〇</div></td>
       <% else %>
-        <td class="align-middle" style="text-align: center"><div class="batu">✕</div></td>
+        <td class="align-middle" style="text-align: center; width: 5%;"><div class="batu">✕</div></td>
       <% end %>
-      <td class="align-middle">
-        <div>(回答)<%= result.answer %></div>
-        <div>(解答)<%= result.solution %></div>
-      </td>
-      <td class="align-middle"><a href="https://www.google.com/search?q=<%= result.q_word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a></td>
+
+      <td class="align-middle" style="width: 5%;"><a href="https://www.google.com/search?q=<%= result.q_word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 <div class="back_index"><%= link_to "単語一覧に戻る", words_path, {class: "link_index"} %></div>
-
+</div>
 
 <script>
 $(function() {

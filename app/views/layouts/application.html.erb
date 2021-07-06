@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@600&family=Lobster&family=Open+Sans+Condensed:ital,wght@1,300&family=Poiret+One&display=swap" rel="stylesheet">  
+    <meta name="viewport" content="width=device-width,initial-scale=1">
   </head>
 
   <body>
@@ -28,26 +29,30 @@
     <%= audio_tag("Phrase02-1.mp3", id:"excellent") %>
     <%= audio_tag("Phrase05-1.mp3", id:"good") %>
 
-    <div class="header">
-      <%= link_to "Word Test" ,"/", class: "top" %>
+    <header>
+    <div id="header" class="wrapper">
       <% if @current_user == nil %>
-      <div class="right_nav">
-        <%= link_to "Signup", "/signup" ,class: "nav" %>
-        <%= link_to "Login", "/login" ,class: "nav" %>
-      </div>
+      <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
+      <ul class="right_nav">
+        <li><%= link_to "Signup", "/signup"  %></li>
+        <li><%= link_to "Login", "/login"  %></li>
+      </ul>
       <% else %>
-      <div class="left_nav">
-        <%= link_to "Create", new_word_path, class: "nav" %>
-        <%= link_to "Index", words_path, class: "nav" %>
-        <%= link_to "Test", choice_test_words_path, class: "nav" %>
-      </div>
-      <div class="right_nav">
-        <p class="nav">User：<%= @current_user.name  %></p>
-        <%= link_to "Logout", "/logout", method: :post ,class: "nav" %>
-      </div>
+      <ul class="left_nav">
+        <li><%= link_to "Create", new_word_path %></li>
+        <li><%= link_to "Index", words_path %></li>
+        <li><%= link_to "Test", choice_test_words_path %></li>
+      </ul>
+      <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
+      <ul class="right_nav">
+        <li>User：<%= @current_user.name  %></li>
+        <li><%= link_to "Logout", "/logout", method: :post  %></li>
+      </ul>
       <% end %>
     </div>
+    </header>
 
     <%= yield %>
+
   </body>
 </html>

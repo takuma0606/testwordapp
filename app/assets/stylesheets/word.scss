@@ -2,30 +2,38 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// ---------------------------------------------------------------------
 // テスト画面
+// ---------------------------------------------------------------------
+.test-area {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding-top: 40px;
+}
+
 a:focus {
   outline: none;
 }
-
 
 #container {
   width: 100%;
 }
 
-.next{
+.next {
   width: 300px;
   height: 34px;
   margin: 0 auto;
   text-align: right;
 }
 
-.fa-chevron-circle-right{
+.fa-chevron-circle-right {
   color: rgb(82, 81, 81);
 }
 
 .header-test {
   width: 300px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   text-align: center;
   display: grid;
   grid-template-rows: 23px;
@@ -37,7 +45,7 @@ a:focus {
   grid-column: 3;
 }
 
-.favorite-button{
+.favorite-button {
   grid-row: 1;
   grid-column: 1;
 }
@@ -47,24 +55,24 @@ a:focus {
   grid-column: 2;
 }
 
-#speakbtn{
+#speakbtn {
   grid-row: 1;
   grid-column: 5;
 }
 
 /* クイズのすべてを管理する親要素 */
-.quiz_area{
-    position: relative;
-    width: 300px;
-    margin: 0 auto;
+.quiz_area {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 300px;
 }
 
-
 /* 問題文 */
-.quiz_area .quiz_question{
-    padding-top: 30px;
-    font-weight: bold;
-    font-size: 30px
+.quiz_area .quiz_question {
+  font-weight: bold;
+  font-size: 2rem;
 }
 
 .quiz_area .quiz_ans_area {
@@ -79,15 +87,15 @@ a:focus {
   color: rgb(0, 0, 0); /* 文字色 */
   padding: 16px 40px; /* 上下の余白、左右の余白 */
   text-decoration: none; /* デフォルトで入るリンクの下線を消す */
-  border:1px solid #CCC;
+  border: 1px solid #ccc;
   border-radius: 30px; /* 角を丸くする */
   transition-property: background-color;
   -webkit-transition-property: background-color;
-  transition-duration: .5s;
-  -webkit-transition-duration: .5s;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
 }
 .word_mean:hover {
-  background-color: #CCC;
+  background-color: #ccc;
   text-decoration: none;
   color: rgb(0, 0, 0);
 }
@@ -97,182 +105,222 @@ a:focus {
   margin-bottom: 15px;
 }
 
-.question{
+.question {
   text-align: center;
 }
 
-.q_word{
+.q_word {
   margin: 0;
 }
 
-#speakbtn,.speakbtn_index,.filter-btn {
-  border: none;  /* 枠線を消す */
+#speakbtn,
+.speakbtn_index,
+.filter-btn {
+  border: none; /* 枠線を消す */
   outline: none; /* クリックしたときに表示される枠線を消す */
   background: transparent; /* 背景の灰色を消す */
   cursor: pointer;
 }
 
-
 /* 回答後に上に被せてタップできなくするための要素（デフォルト非表示） */
-.quiz_area .quiz_area_bg{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 999;
-    background: rgba(0, 0, 0, 0);
-    display: none;
-    color: #FFF;
-    text-align: center;
+.quiz_area .quiz_area_bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0);
+  display: none;
+  color: #fff;
+  text-align: center;
 }
 
-
-
 /* 画面に〇、×を表示するための要素（デフォルト非表示、回答後に一時的に表示） */
-.quiz_area .quiz_area_icon{
-    position: absolute;
-    box-sizing: border-box;
-    top: 50%;
-    left: 50%;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    color: red;
-    display: none;
-    font-size: 10em;
-    font-weight: bold;
-    -webkit-text-stroke: 4px #FFF;
+.quiz_area .quiz_area_icon {
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  color: red;
+  display: none;
+  font-size: 10em;
+  font-weight: bold;
+  -webkit-text-stroke: 4px #fff;
 }
 
 /* .trueまたは.falseのクラスが付与されたら表示するものとみなす */
-.quiz_area .quiz_area_icon.true, .quiz_area .quiz_area_icon.false{
-    display: block;
+.quiz_area .quiz_area_icon.true,
+.quiz_area .quiz_area_icon.false {
+  display: block;
 }
 
 /* .trueは正解（〇を表示） */
-.quiz_area .quiz_area_icon.true:before{
-    content: '〇';
-    color: red;
-    opacity: 0.7;
+.quiz_area .quiz_area_icon.true:before {
+  content: "〇";
+  color: red;
+  opacity: 0.7;
 }
 /* .falseは不正解（×を表示） */
-.quiz_area .quiz_area_icon.false:before{
-    content: '×';
-    color: blue;
-    opacity: 0.7;
+.quiz_area .quiz_area_icon.false:before {
+  content: "×";
+  color: blue;
+  opacity: 0.7;
 }
 
-
-
-.result{
+.result {
   display: inline-block;
 }
 
+// ---------------------------------------------------------------------
+// 単語新規作成画面
+// ---------------------------------------------------------------------
 
-// 単語新規作成-------------------------------------------------------------------------------------------------------------------
-
-.create_box{
+.create_box {
   position: relative;
   width: 100%;
-  height: 460px;
+  min-height: 100%;
 }
 
-.word_create{
+.word_create {
   position: absolute;
-  top: 53%;
-  left: 0;
-  right: 0;
+  top: 60%;
+  left: 50%;
   text-align: center;
-  transform: translateY(-50%);
-  margin: auto;
-  width: 500px;
+  transform: translate(-50%, -60%);
+  width: 50%;
 }
 
-.word_create h1{
-  margin: 50px;
+.word_create h1 {
+  margin-bottom: 50px;
   font-family: Raleway, sans-serif;
-  font-size: 50px;
+  font-size: 3.1rem;
 }
 
-.new_word_submit{
-  margin: 30px;
-  background-color: #e27441;
-  border-color:rgb(240, 147, 104);
-  border-bottom: 2px solid #be783f;
-  border-right: 2px solid #c77e43;
-  color: #fff;
-  font-family: Raleway, sans-serif;
-  cursor: pointer;
-  letter-spacing: 2px;
-  font-size: 16px;
-  line-height: 24px;
-  padding: 8px 16px;
+.create-form {
+  display: flex;
+  justify-content: space-between;
 }
 
-.create_field{
-  display: inline-block;
-  margin: 0 25px;
-  vertical-align: top;
+.create_field {
+  width: 45%;
 }
 
-.text_field{
+.text_field {
   border: none;
-	border-bottom: 2px solid #1b2538;
+  border-bottom: 2px solid #1b2538;
 }
 
-.text_field:focus{
+.text_field:focus {
   outline: none;
-}
-
-.error {
-  color: red;
-  margin: 0;
 }
 
 .error_box {
   height: 80px;
+  color: red;
 }
 
-.word_create select{
+.pull_down select {
   border: none;
   outline: none;
   border-bottom: 2px solid #000000;
   width: 180px;
 }
 
-.pull_down{
+.pull_down {
   margin-bottom: 50px;
 }
-// ------------------------------------------------------------------------------------------------------------------------
 
-// 単語一覧
-.index_table {
-    display: block;
-    overflow-y: scroll;
-    height: 430px;
-    width: 100%;
-    border-collapse: collapse;
+.new_word_submit {
+  margin: 30px;
+  background-color: #e27441;
+  border-color: rgb(240, 147, 104);
+  border-bottom: 2px solid #be783f;
+  border-right: 2px solid #c77e43;
+  color: #fff;
+  font-family: Raleway, sans-serif;
+  cursor: pointer;
+  letter-spacing: 2px;
+  line-height: 24px;
+  padding: 8px 16px;
 }
+
+@media screen and (max-width: 700px) {
+  .create-form {
+    flex-direction: column;
+  }
+
+  .create_field {
+    margin: 0 auto;
+    width: 180px;
+  }
+}
+
+// ---------------------------------------------------------------------
+// 単語一覧画面
+// ---------------------------------------------------------------------
+.index-area {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
+.index-header {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.index-area form {
+  margin: 0 auto;
+  height: 90%;
+  width: 80%;
+}
+
+.index_table {
+  display: block;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  border-collapse: collapse;
+  height: 100%;
+}
+
+.index_table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: white;
+  height: 50px;
+}
+
 .index_table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background: white;
-    border-top: white;
-    font-weight: lighter;
-    height: 50px;
+  font-weight: lighter;
+  border-top: white;
+}
+
+.index_table p {
+  margin: 0;
+}
+
+.word-mean {
+  font-size: 0.75rem;
+}
+
+.modal-body p {
+  margin: 0 auto;
 }
 
 .filter-btn {
-  margin-top: 10px; 
+  margin-top: 8px;
   margin-bottom: 10px;
 }
 
 #narrow-down-search {
   float: right;
   display: flex;
-  margin-top: 10px; 
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -281,21 +329,30 @@ a:focus {
   font-weight: 900;
 }
 
-
-
 .yellow {
-  color: #FFFF00;
+  color: #ffff00;
   cursor: pointer;
 }
 
 .clear {
-  color: #CCC;
+  color: #ccc;
   cursor: pointer;
 }
 
-
+@media screen and (max-width: 450px) {
+  #search-field {
+    display: inline-block;
+    width: 130px;
+  }
+}
 
 // テスト結果
+.result-area {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
 #result_circle {
   margin: 50px;
   width: 250px;
@@ -310,18 +367,18 @@ a:focus {
   position: relative;
   padding: 0.5em 1.4em;
   text-decoration: none;
-  background: #7a837f;/*ボタン色*/
-  color: #FFF;
-  border-bottom: solid 5px #3d3f3d;/*ボタン色より暗めに*/
-  border-right: solid 5px #4d534d;/*ボタン色より暗めに*/
+  background: #7a837f; /*ボタン色*/
+  color: #fff;
+  border-bottom: solid 5px #3d3f3d; /*ボタン色より暗めに*/
+  border-right: solid 5px #4d534d; /*ボタン色より暗めに*/
 }
 
-.btn-square-slant:hover{
+.btn-square-slant:hover {
   color: white;
   text-decoration: none;
 }
 
-.btn-square-slant:before {  
+.btn-square-slant:before {
   content: " ";
   position: absolute;
   bottom: -5px;
@@ -331,10 +388,10 @@ a:focus {
   border-width: 0 6px 6px 0px;
   border-style: solid;
   border-color: transparent;
-  border-bottom-color: #FFF;
+  border-bottom-color: #fff;
 }
 
-.btn-square-slant:after {  
+.btn-square-slant:after {
   content: " ";
   position: absolute;
   top: -1px;
@@ -343,23 +400,24 @@ a:focus {
   height: 0;
   border-width: 0px 6px 6px 0px;
   border-style: solid;
-  border-color: #FFF;
+  border-color: #fff;
   border-bottom-color: transparent;
 }
 
 .btn-square-slant:active {
   /*ボタンを押したとき*/
-  border:none;
-  -webkit-transform: translate(6px,6px);
-  transform: translate(6px,6px);
+  border: none;
+  -webkit-transform: translate(6px, 6px);
+  transform: translate(6px, 6px);
 }
 
-.btn-square-slant:active:after, .btn-square-slant:active:before {
-  content: none;/*ボタンを押すと線が消える*/
+.btn-square-slant:active:after,
+.btn-square-slant:active:before {
+  content: none; /*ボタンを押すと線が消える*/
 }
 // ---------------------------------------------------------------------------------------
 
-.result_box{
+.result_box {
   width: 100%;
   margin-top: 80px;
   margin-bottom: 120px;
@@ -367,24 +425,27 @@ a:focus {
 }
 
 .result_box p {
-  font-family: 'Small Fonts',sans-serif;
-  font-size: 80px;
+  font-family: "Small Fonts", sans-serif;
+  font-size: 5rem;
+}
+
+.result-table p {
+  margin: 0;
 }
 
 .maru {
-  font-size: 250%;
+  font-size: 1.5625rem;
   font-weight: lighter;
   color: red;
   display: inline-block;
 }
 
 .batu {
-  font-size: 250%;
+  font-size: 1.5625rem;
   font-weight: bold;
   color: blue;
   display: inline-block;
 }
-
 
 .back_index {
   text-align: center;
@@ -399,8 +460,8 @@ a:focus {
   text-decoration: none;
   transition-property: background-color;
   -webkit-transition-property: background-color;
-  transition-duration: .5s;
-  -webkit-transition-duration: .5s;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
 }
 
 .link_index:hover {
@@ -409,45 +470,39 @@ a:focus {
   text-decoration: none;
 }
 
-// 単語テスト選択画面
+@media screen and (max-width: 400px) {
+  .result_box p {
+    font-size: 3.75rem;
+  }
+
+  .result-table th {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------
+// テスト選択画面
+// ---------------------------------------------------------------------
+
 .choice_area {
   position: relative;
   width: 100%;
-  height: 460px;
+  min-height: 100%;
 }
 
 .select_box {
   position: absolute;
   top: 60%;
-  left: 0;
-  right: 0;
+  left: 50%;
+  width: 400px;
   text-align: center;
-  transform: translateY(-50%);
-  margin: auto;
-}
-
-.notice {
-  width: 390px;
-  margin: 10px auto;
-  height: 24px;
-}
-
-.notice i {
-  float: left;
-  cursor: pointer;
-  color:rgb(233, 236, 10);
-}
-
-.notice p {
-  display: none;
-  color:rgb(0, 0, 0);
-  font-weight: bold;
+  transform: translate(-50%, -60%);
 }
 
 .hinsi-box {
+  width: 100%;
   height: 70px;
 }
-
 
 .test_btn {
   padding: 5px;
@@ -469,10 +524,9 @@ a:focus {
   text-decoration: none;
 }
 
-
 .btn-animation-02 {
   display: inline-block;
-  width: 400px;
+  width: 100%;
   border: 2px solid #e27441;
   text-align: center;
   font-size: 16px;
@@ -485,25 +539,22 @@ a:focus {
   position: relative;
 }
 
-
 .btn-animation-02 span {
   position: relative;
   z-index: 1;
 }
 
-
 .btn-animation-02::before,
 .btn-animation-02::after {
   content: "";
   display: block;
-  background-color: #FFF;
+  background-color: #fff;
   width: 50%;
   height: 100%;
   position: absolute;
   top: 0;
-  transition: .2s;
+  transition: 0.2s;
 }
-
 
 .btn-animation-02::before {
   left: 0;
@@ -513,18 +564,19 @@ a:focus {
   right: 0;
 }
 
-
 .btn-animation-02:hover:before,
 .btn-animation-02:hover:after {
   width: 0;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
-
 .btn-animation-02:hover {
-  color: #FFF;
+  color: #fff;
   text-decoration: none;
 }
 
-
-
+@media screen and (max-width: 450px) {
+  .select_box {
+    width: 90%;
+  }
+}

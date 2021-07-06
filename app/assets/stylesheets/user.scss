@@ -1,41 +1,34 @@
-html,.text-center {
-  height: 100%;
-}
-
 .text-center {
-  margin: auto;
-  padding-top: 40px;
-  padding-bottom: 19px;
-}
-
-.bg_image {
-  height: 100%;
+  position: relative;
   width: 100%;
+  min-height: 100%;
+  padding-top: 40px;
   background-image: url(word.jpg);
+  background-position: center;
   background-size: cover;
-}
-
-.bg_mask {
-  height: 100%;
-  background: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.445);
+  background-blend-mode: lighten;
+  box-sizing: border-box;
 }
 
 .form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 500px;
+  padding-top: 40px;
   background-color: white;
 }
 .form-signin .checkbox {
   font-weight: 400;
 }
 .form-signin .form-control {
-  position: relative;
+  width: 90%;
+  margin: 0 auto;
   box-sizing: border-box;
   height: auto;
   padding: 10px;
-  font-size: 16px;
 }
 .form-signin .form-control:focus {
   z-index: 2;
@@ -49,4 +42,14 @@ html,.text-center {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.text-center button {
+  width: 90%;
+}
+
+@media screen and (max-width: 700px) {
+  .form-signin {
+    width: 300px;
+  }
 }
