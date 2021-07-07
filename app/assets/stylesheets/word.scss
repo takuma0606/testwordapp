@@ -207,12 +207,13 @@ a:focus {
 }
 
 .create_field {
-  width: 45%;
+  width: 180px;
 }
 
 .text_field {
   border: none;
   border-bottom: 2px solid #1b2538;
+  width: 100%;
 }
 
 .text_field:focus {
@@ -255,12 +256,15 @@ a:focus {
   }
 
   .create_field {
-    margin: 0 auto;
     width: 100%;
   }
 
   .error_box {
     height: 50px;
+  }
+
+  .pull_down select {
+    width: 100%;
   }
 
   .new_word_submit {
