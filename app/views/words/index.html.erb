@@ -22,12 +22,12 @@
               <%= f.label :favorited, "お気に入り" %>
               <%= f.check_box :favorited, {}, true, nil %>
               </p>
-              <p><%= f.submit "絞り込み" %></p>
-            <% end %>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.submit "絞り込み", class: "btn btn-primary" %>
             </div>
+            <% end %>
         </div>
     </div>
 </div>

@@ -126,3 +126,9 @@ header {
     margin-right: 20px;
   }
 }
+
+@media screen and (max-width: 370px) {
+  #header li:first-of-type {
+    display: none;
+  }
+}
