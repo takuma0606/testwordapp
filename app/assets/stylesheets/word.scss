@@ -196,7 +196,7 @@ a:focus {
   left: 50%;
   text-align: center;
   transform: translate(-50%, -60%);
-  width: 50%;
+  width: 500px;
 }
 
 .word_create h1 {
@@ -254,7 +254,11 @@ a:focus {
   padding: 8px 16px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
+  .word_create {
+    width: 50%;
+  }
+
   .create-form {
     flex-direction: column;
   }
