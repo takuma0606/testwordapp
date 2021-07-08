@@ -5,10 +5,8 @@
 // ---------------------------------------------------------------------
 // テスト画面
 // ---------------------------------------------------------------------
-.test-area {
-  position: relative;
+.test-area1 {
   width: 100%;
-  height: 100%;
   padding-top: 40px;
 }
 
@@ -61,11 +59,17 @@ a:focus {
 }
 
 /* クイズのすべてを管理する親要素 */
+.test-area2 {
+  position: relative;
+  width: 100%;
+  height: 80%;
+}
+
 .quiz_area {
   position: absolute;
-  top: 60%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -10%);
   width: 300px;
 }
 
