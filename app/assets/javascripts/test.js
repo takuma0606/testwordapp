@@ -4,7 +4,6 @@ $(function() {
         var judge = $(this).text();
         var question = $('p.q_word').text();
         const parent = this;
-        console.log(judge);
 
         $.ajax({
           url: "/words/judge",

@@ -12,8 +12,8 @@ $(function() {
 });
 
 $(function() {
-  $('.notice i').on('click', function(){
-    $('.notice p').toggle();
+  $('.news i').on('click', function(){
+    $('.news p').toggle();
   });
 });
 

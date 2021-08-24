@@ -1,20 +1,14 @@
 <div class="text-center">
 <main class="form-signin">
-<%= form_tag "/signup" do %>
-<form>
+<%= form_with model: @user, url: signup_url, local: true do |f| %>
   <h1 class="h3 mb-3 fw-normal">signup</h1>
-  <label for="inputEmail" class="visually-hidden">Username</label>
-  <input name="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-  <label for="inputPassword" class="visually-hidden">Password</label>
-  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
-  <label>
-    <input type="checkbox" value="remember-me"> Remember me
-  </label>
-  </div>
-  <button class="btn btn-lg btn-primary" type="submit">signup</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
-</form>
+  <%= f.label :name, "Username" %>
+  <%= f.text_field :name, :class => 'form-control', :placeholder => "Username", :value => @user.name %>
+  <%= f.label :password, "Password", :class => 'visually-hidden' %>
+  <%= f.password_field :password, :class => 'form-control', :placeholder => "Password" %>
+  <%= f.label :password_confirmation, "Password_Confirmation", :class => 'visually-hidden' %>
+  <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Password" %>
+  <%= f.submit 'signup', :class => 'btn btn-lg btn-primary' %>
 <% end %>
 </main>
 </div>

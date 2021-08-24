@@ -11,7 +11,7 @@
   <tbody>
   <% @results.each_with_index do |result,index| %>
     <tr>
-      <th scope="row" class="align-middle"　style="width: 5%;"><%= index + 1 %></th>
+      <td scope="row" class="align-middle"　style="width: 5%;"><%= index + 1 %></td>
       <% word = Word.with_deleted.find_by(id: result.q_id) %>
       <% if word.favorite %>
         <td class="align-middle" style="width: 5%;"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
@@ -29,7 +29,7 @@
         </td> 
       <% end %>
 
-      <td class="align-middle" style="width: 70%;">
+      <td class="align-middle word" style="width: 70%;">
         <p class='q_word word_<%= result.id %>'><%= result.q_word %></p>
         <p class="word-mean"><%= result.solution %></p>
       </td>
@@ -41,7 +41,7 @@
         <td class="align-middle" style="text-align: center; width: 5%;"><div class="batu">✕</div></td>
       <% end %>
 
-      <td class="align-middle" style="width: 5%;"><a href="https://www.google.com/search?q=<%= result.q_word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i></a></td>
+      <td class="align-middle" style="width: 5%;"><a href="https://www.google.com/search?q=<%= result.q_word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i></a></td>
     </tr>
   <% end %>
   </tbody>

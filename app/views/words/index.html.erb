@@ -15,6 +15,10 @@
             <%= form_with url: words_path, method: :get, local: true do |f| %>
               <p><%= f.collection_select :search, Word.with_deleted.where(user_id: @current_user.id).select(:part_of_speech).distinct, :part_of_speech, :part_of_speech, {selected: params[:search], include_blank: '指定なし'} %></p>
               <p>
+              <%= f.label :learned_and_forgot, "覚えた単語と覚えていない単語を表示" %>
+              <%= f.check_box :learned_and_forgot, {}, true, nil %>
+              </p>
+              <p>
               <%= f.label :learned, "覚えた単語を表示" %>
               <%= f.check_box :learned, {}, true, nil %>
               </p>
@@ -32,7 +36,6 @@
     </div>
 </div>
 
-
 <button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal3">
 <span class="fa-stack">
   <i class="far fa-square fa-stack-2x"></i>
@@ -40,6 +43,30 @@
 </span>
 </button>
 
+<button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal4">
+<span class="fa-stack">
+  <i class="far fa-question-circle fa-lg"></i>
+</span>
+</button>
+
+<div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="m-header">Help</div>      
+      <div class="m-body">
+          <p>・<i class="fas fa-filter"></i>を押すと単語の条件検索ができます。<p>
+          <p>・<i class="far fa-trash-alt"></i>を押すとチェックした単語の一括削除ができます。<p>
+          <p>・単語一覧にある単語 or 単語の意味をクリックすると編集ができます。<p>
+          <p>・右上にある検索バーに単語 or 単語の意味を入力すると該当する単語を検索することができます。<p>
+          <p>・<i class="fas fa-search" style="color: black;"></i>をクリックすると選択した単語をgoogleで検索します。<p>
+          <p>・<i class="fas fa-star" style="color: yellow;"></i>：お気に入り状態 , <i class="fas fa-star" style="color: #CCC;"></i>：お気に入り解除状態</p>
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="narrow-down-search">
 <input type="text" id="search-field" placeholder="search">
@@ -48,6 +75,7 @@
 </div>
 
 <%= form_with url: destroy_all_words_path, method: :delete, local: true do |f| %>
+<div class="table-area">
 <table class="table index_table table-hover">
 <thead>
   <tr>
@@ -76,7 +104,7 @@
         <td class="align-middle"><%= link_to "忘", "/words/#{word.id}/forgot", method: :post, class: "forgot_btn" %></td>
       <% end %>
       <td class="align-middle"><p>(<%= word.part_of_speech.slice(0) %>)</p></td>
-      <td class="align-middle">
+      <td class="align-middle word">
         <p class='word_<%= word.id %>'><%= best_in_place word, :word, :as => :input, :html_attrs => { size: 5 } %></p>
         <p class="word-mean"><%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></p>
       </td>
@@ -86,12 +114,13 @@
           <i class="fas fa-trash-alt" style="color: black;"></i>
         <% end %>
       </td>
-      <td class="align-middle"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search"></i>
+      <td class="align-middle"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i>
       </a></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

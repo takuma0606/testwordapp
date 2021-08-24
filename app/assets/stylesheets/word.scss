@@ -300,12 +300,9 @@ a:focus {
   width: 80%;
 }
 
-.index_table {
-  display: block;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  border-collapse: collapse;
+.table-area {
   height: 100%;
+  overflow-y: scroll;
 }
 
 .index_table thead {
@@ -321,6 +318,10 @@ a:focus {
   border-top: white;
 }
 
+.table td:not(.word) {
+  text-align: center;
+}
+
 .index_table p {
   margin: 0;
 }
@@ -330,8 +331,19 @@ a:focus {
 }
 
 .modal-body p {
-  width: 160px;
-  margin: 0 auto;
+  width: 100%;
+}
+
+.m-header {
+  height: 60px;
+  padding: 5px 20px;
+  font-size: 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.m-body {
+  height: 330px;
+  padding: 20px;
 }
 
 .filter-btn {
@@ -366,6 +378,12 @@ a:focus {
   #search-field {
     display: inline-block;
     width: 130px;
+  }
+  .m-body {
+    font-size: 0.875rem;
+  }
+  .modal-body form {
+    width: 90%;
   }
 }
 
@@ -525,6 +543,52 @@ a:focus {
   transform: translate(-50%, -60%);
 }
 
+.news {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news i {
+  cursor: pointer;
+}
+
+.balloon {
+  display: none;
+  position: relative;
+  float: right;
+  width: 350px;
+  padding: 5px 0px;
+  border: solid 3px #555;
+  box-sizing: border-box;
+  margin: 0;
+  border-radius: 10px;
+}
+
+.balloon:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -24px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-right: 12px solid #fff;
+  z-index: 2;
+}
+
+.balloon:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  margin-top: -14px;
+  border: 14px solid transparent;
+  border-right: 14px solid #555;
+  z-index: 1;
+}
+
 .hinsi-box {
   width: 100%;
   height: 70px;
@@ -604,5 +668,8 @@ a:focus {
 @media screen and (max-width: 450px) {
   .select_box {
     width: 90%;
+  }
+  .balloon {
+    width: 270px;
   }
 }

@@ -11,9 +11,4 @@ $(function(){
 			}
 		});
 	});
-
-	$('#button2').on("click",function(){
-		$('#search-field').val('');
-		$('.index_table tr').show();
-	});
 });

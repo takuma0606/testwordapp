@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  validates:word,{presence: true, uniqueness: { scope: :user_id }}
+  validates:word, presence: true, uniqueness: { scope: :user_id }
   validates:meaning,{presence: true}
   validates:part_of_speech,{presence: true}
   validates_uniqueness_of :word, conditions: -> { with_deleted }

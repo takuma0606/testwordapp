@@ -20,7 +20,15 @@ class WordsController < ApplicationController
     if params[:search].present?
     # 検索フォームからアクセスした時の処理
       search = Word.search(@current_user.id,params[:search])
-      if params[:learned] && params[:favorited]
+      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
+        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot] && params[:favorited]
+        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot] && params[:learned]
+        @words = search.with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot]
+        @words = search.with_deleted.order(deleted_at: :desc)
+      elsif params[:learned] && params[:favorited]
         @words = search.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]
         @words = search.only_deleted.order(deleted_at: :desc)
@@ -32,7 +40,15 @@ class WordsController < ApplicationController
     else
     # 検索フォーム以外からアクセスした時の処理
       nonsearch = Word.nonsearch(@current_user.id)
-      if params[:learned] && params[:favorited]
+      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
+        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot] && params[:favorited]
+        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot] && params[:learned]
+        @words = nonsearch.with_deleted.order(deleted_at: :desc)
+      elsif params[:learned_and_forgot]
+        @words = nonsearch.with_deleted.order(deleted_at: :desc)
+      elsif params[:learned] && params[:favorited]
         @words = nonsearch.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]
         @words = nonsearch.only_deleted.order(deleted_at: :desc)
@@ -64,21 +80,20 @@ class WordsController < ApplicationController
   def destroy_all
     if params[:deletes] != nil
       params[:deletes].each do |data|
-        Word.find(data).really_destroy!
+        Word.with_deleted.find(data).really_destroy!
       end
       redirect_to request.referer
     end
   end
 
   def destroy
-    @word = Word.find(params[:id])
-    @word.really_destroy!
+    Word.with_deleted.find(params[:id]).really_destroy!
     redirect_to words_path
   end
 
 
   def update
-    @word = Word.find(params[:id])
+    @word = Word.with_deleted.find(params[:id])
     @word.update(word_edit_params)
     respond_to do |format|
       format.html { redirect_to @word}
@@ -98,18 +113,21 @@ class WordsController < ApplicationController
     gon.number = @number = List.where(user_id: @current_user.id).count
   end
 
+  def choices2
+    model_reset if params[:mark]
+    Partofspeech.create(user_id: @current_user.id, name: params[:name], path: params[:path]) if List.where(user_id: @current_user.id).count == 0
+    name = Partofspeech.find_by(user_id: @current_user.id).name
+    listword = List.where(user_id: @current_user.id).pluck(:word)
+    return [name, listword]
+  end 
 
 
   def test
     unless request.referer
       redirect_to "/"
     else
-      model_reset if params[:mark]
-      Partofspeech.create(user_id: @current_user.id, name: params[:name], path: params[:path]) if List.where(user_id: @current_user.id).count == 0
-      name = Partofspeech.find_by(user_id: @current_user.id).name
-      listword = List.where(user_id: @current_user.id).pluck(:word)
-      @random = Word.search(@current_user.id,name).where.not(word: listword).order(Arel.sql("RANDOM()")).first
-      choices(name)
+      @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      choices(choices2[0])
     end
   end
 
@@ -117,13 +135,9 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      model_reset if params[:mark]
+      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      choices(choices2[0])
       gon.learned = true
-      Partofspeech.create(user_id: @current_user.id, name: params[:name], path: params[:path]) if List.where(user_id: @current_user.id).count == 0
-      name = Partofspeech.find_by(user_id: @current_user.id).name
-      listword = List.where(user_id: @current_user.id).pluck(:word)
-      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: name).where.not(word: listword).order(Arel.sql("RANDOM()")).first
-      choices(name)
       render 'test'
     end
   end
@@ -132,13 +146,9 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      model_reset if params[:mark]
+      @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      choices(choices2[0])
       gon.favorite = true
-      Partofspeech.create(user_id: @current_user.id, name: params[:name], path: params[:path]) if List.where(user_id: @current_user.id).count == 0
-      name = Partofspeech.find_by(user_id: @current_user.id).name
-      listword = List.where(user_id: @current_user.id).pluck(:word)
-      @random = Word.search(@current_user.id,name).where(favorite: true).where.not(word: listword).order(Arel.sql("RANDOM()")).first
-      choices(name)
       render 'test'
     end
   end
@@ -187,7 +197,7 @@ class WordsController < ApplicationController
   end
 
   def word_edit_params
-    params.require(:word).permit(:word,:meaning,:part_of_speech)
+    params.require(:word).permit(:word,:meaning)
   end
 
 end
