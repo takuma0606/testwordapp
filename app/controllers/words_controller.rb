@@ -67,7 +67,9 @@ class WordsController < ApplicationController
   
   # 覚えたボタン
   def learned
-    Word.find(params[:id]).destroy
+    word = Word.find(params[:id])
+    word.update(wrong_number: 0)
+    word.destroy
   end
 
   # 忘れたボタン
@@ -126,8 +128,14 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
-      choices(choices2[0])
+
+      @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(:count).first
+      unless @random      
+        redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするには単語を登録してください" }
+      else
+        @random.update(count: @random.count + 1)
+        choices(choices2[0])
+      end
     end
   end
 
@@ -136,9 +144,13 @@ class WordsController < ApplicationController
       redirect_to "/"
     else
       @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
-      choices(choices2[0])
-      gon.learned = true
-      render 'test'
+      unless @random      
+        redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
+      else
+        choices(choices2[0])
+        gon.learned = true
+        render 'test'
+      end
     end
   end
 
@@ -147,11 +159,31 @@ class WordsController < ApplicationController
       redirect_to "/"
     else
       @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
-      choices(choices2[0])
-      gon.favorite = true
-      render 'test'
+      unless @random      
+        redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするにはお気に入り登録をしてください" }
+      else
+        choices(choices2[0])
+        gon.favorite = true
+        render 'test'
+      end
     end
   end
+
+  def wrong_test
+    unless request.referer
+      redirect_to "/"
+    else
+      @random = Word.where(user_id: @current_user.id, part_of_speech: choices2[0], wrong_number: 2..Float::INFINITY).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      unless @random      
+        redirect_to choice_test_words_path, flash: {error: "間違えやすい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
+      else
+        choices(choices2[0])
+        gon.wrong = true
+        render 'test'
+      end
+    end
+  end
+
 
   def result
     unless request.referer 
@@ -169,8 +201,14 @@ class WordsController < ApplicationController
     q_id = question.id
     if q_meaning == params[:answer]
       test = {'test' => true}
+      if Word.exists?(id: q_id)
+        question.update(wrong_number: question.wrong_number - 1)
+      end
     else
       test = {'test' => false}
+      if Word.exists?(id: q_id)
+        question.update(wrong_number: question.wrong_number + 1)
+      end
     end
     Result.create(answer: params[:answer], solution: q_meaning, user_id: @current_user.id, q_word: params[:question], q_id: q_id)
     test['ans'] = q_meaning

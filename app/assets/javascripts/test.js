@@ -31,6 +31,8 @@ $(function() {
             $('div.next').html('<a href="/words/learned_test" class="next_test" onclick="$(this).click(function(e){ return false });"><i class="fas fa-chevron-circle-right fa-lg"></i></a>');
           }else if (gon.number < 5 && gon.favorite) {
             $('div.next').html('<a href="/words/favorite_test" class="next_test" onclick="$(this).click(function(e){ return false });"><i class="fas fa-chevron-circle-right fa-lg"></i></a>');
+          }else if (gon.number < 5 && gon.wrong) {
+            $('div.next').html('<a href="/words/wrong_test" class="next_test" onclick="$(this).click(function(e){ return false });"><i class="fas fa-chevron-circle-right fa-lg"></i></a>');
           }else if (gon.number < 5){
             $('div.next').html('<a href="/words/test" class="next_test" onclick="$(this).click(function(e){ return false });"><i class="fas fa-chevron-circle-right fa-lg"></i></a>');
           }else{

@@ -1,46 +1,69 @@
 <% model_reset %>
 <div class="choice_area">
+
   <div class="select_box">
     <div class="news">
       <i class="fas fa-bullhorn"></i>
       <p class="balloon">単語を5つ登録するとテストができます。</p>
     </div>
-    <div><a href="#" class="btn-animation-02"><span>覚えてない単語<span></a></div>
-    <div class="hinsi-box">
-    <% @part_of_speeches.each do |part| %>
-      <%= link_to part, test_words_path(name: part, path: "test_words_path"), class: "test_btn #{part}-not-learned" %>
-      <script>
-        if (<%= Word.search(@current_user.id,part).count < 5 %>) { 
-          $('.<%= part %>-not-learned').remove();
-        }
-      </script>
-    <% end %>
-    </div>
 
-    <div><a href="#" class="btn-animation-02"><span>お気に入りにした単語<span></a></div>
-    <div class="hinsi-box">
-    <% @part_of_speeches.each do |part| %>
-      <%= link_to part, favorite_test_words_path(name: part, path: "favorite_test_words_path"), class: "test_btn #{part}-favorite" %>
-      <script>
-        if (<%= Word.search(@current_user.id,part).where(favorite: true).count < 5 %>) { 
-          $('.<%= part %>-favorite').remove();
-        }
-      </script>
-    <% end %>
-    </div>
+    <div id="select_area">
+      <div class="choice_test_box">
+      <div><a href="#" class="btn-animation-02"><span>覚えてない単語<span></a></div>
+      <div class="hinsi-box">
+      <% @part_of_speeches.each do |part| %>
+        <%= link_to part, test_words_path(name: part, path: "test_words_path"), class: "test_btn #{part}-not-learned" %>
+        <script>
+          if (<%= Word.search(@current_user.id,part).count < 5 %>) { 
+            $('.<%= part %>-not-learned').remove();
+          }
+        </script>
+      <% end %>
+      </div>
+      </div>
 
-    <div><a href="#" class="btn-animation-02"><span>覚えた単語<span></a></div>
-    <div class="hinsi-box">
-    <% @part_of_speeches.each do |part| %>
-      <%= link_to part, learned_test_words_path(name: part, path: "learned_test_words_path"), class: "test_btn #{part}-learned" %>
-      <script>
-        if (<%= Word.search(@current_user.id,part).only_deleted.count < 5 %>) { 
-          $('.<%= part %>-learned').remove();
-        }
-      </script>
-    <% end %>
-    </div>
+      <div class="choice_test_box">
+      <div><a href="#" class="btn-animation-02"><span>お気に入りにした単語<span></a></div>
+      <div class="hinsi-box">
+      <% @part_of_speeches.each do |part| %>
+        <%= link_to part, favorite_test_words_path(name: part, path: "favorite_test_words_path"), class: "test_btn #{part}-favorite" %>
+        <script>
+          if (<%= Word.search(@current_user.id,part).where(favorite: true).count < 5 %>) { 
+            $('.<%= part %>-favorite').remove();
+          }
+        </script>
+      <% end %>
+      </div>
+      </div>
 
+      <div class="choice_test_box">
+      <div><a href="#" class="btn-animation-02"><span>覚えた単語<span></a></div>
+      <div class="hinsi-box">
+      <% @part_of_speeches.each do |part| %>
+        <%= link_to part, learned_test_words_path(name: part, path: "learned_test_words_path"), class: "test_btn #{part}-learned" %>
+        <script>
+          if (<%= Word.search(@current_user.id,part).only_deleted.count < 5 %>) { 
+            $('.<%= part %>-learned').remove();
+          }
+        </script>
+      <% end %>
+      </div>
+      </div>
+
+      <div class="choice_test_box">
+      <div><a href="#" class="btn-animation-02"><span>間違えやすい単語<span></a></div>
+      <div class="hinsi-box">
+      <% @part_of_speeches.each do |part| %>
+        <%= link_to part, wrong_test_words_path(name: part, path: "wrong_test_words_path"), class: "test_btn #{part}-wrong" %>
+        <script>
+          if (<%= Word.where(user_id: @current_user.id, part_of_speech: part, wrong_number: 2..Float::INFINITY).count < 5 %>) { 
+            $('.<%= part %>-wrong').remove();
+          }
+        </script>
+      <% end %>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 

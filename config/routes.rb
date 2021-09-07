@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :test
       get :learned_test
       get :favorite_test
+      get :wrong_test
       get :result
       get :choice_test
       post :judge

@@ -1,8 +1,8 @@
 class Word < ApplicationRecord
-  validates:word, presence: true, uniqueness: { scope: :user_id }
-  validates:meaning,{presence: true}
-  validates:part_of_speech,{presence: true}
-  validates_uniqueness_of :word, conditions: -> { with_deleted }
+  validates:word, presence: true
+  validates:meaning, presence: true
+  validates:part_of_speech, presence: true
+  validates_uniqueness_of :word, :scope => [:user_id, :part_of_speech],  conditions: -> { with_deleted }
   acts_as_paranoid
 
   def self.search(user,pos)
