@@ -173,7 +173,7 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.where(user_id: @current_user.id, part_of_speech: choices2[0], wrong_number: 2..Float::INFINITY).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      @random = Word.where(user_id: @current_user.id, part_of_speech: choices2[0], wrong_number: 2..Float::INFINITY).where.not(word: choices2[1]).order(wrong_number: "DESC").first
       unless @random      
         redirect_to choice_test_words_path, flash: {error: "間違えやすい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
       else
