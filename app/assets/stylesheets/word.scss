@@ -374,16 +374,29 @@ a:focus {
   cursor: pointer;
 }
 
+td.mix_btn {
+  display: none;
+}
+
 @media screen and (max-width: 450px) {
-  #search-field {
-    display: inline-block;
-    width: 130px;
-  }
   .m-body {
     font-size: 0.875rem;
   }
   .modal-body form {
     width: 90%;
+  }
+  #narrow-down-search {
+    float: none;
+    justify-content: center;
+  }
+  td.hide_btn {
+    display: none;
+  }
+  td.mix_btn {
+    display: block;
+  }
+  .index_table tr th:last-child {
+    display: none;
   }
 }
 

@@ -79,11 +79,10 @@
 <table class="table index_table table-hover">
 <thead>
   <tr>
-    <th scope="col" class="align-middle" style="width: 5%;"><input type="checkbox" name="allchecked" id="all" ></th>
-    <th scope="col" class="align-middle" style="width: 5%;"></th>
-    <th scope="col" class="align-middle" style="width: 5%;"></th>
-    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%; text-align: center"><input type="checkbox" name="allchecked" id="all" ></th>
     <th scope="col" class="align-middle"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
     <th scope="col" class="align-middle" style="width: 5%;"></th>
     <th scope="col" class="align-middle" style="width: 5%;"></th>
     <th scope="col" class="align-middle" style="width: 5%;"></th>
@@ -93,6 +92,11 @@
     <% @words.each do |word| %>
     <tr style="height: 60px;">
       <td class="align-middle"><%= f.check_box :deletes, { multiple: true }, checked_value = word.id, unchecked_value = nil %></td>
+      <td class="align-middle word">
+        <p class='word_<%= word.id %>'><%= best_in_place word, :word, :as => :input, :html_attrs => { size: 5 } %></p>
+        <p class="word-mean">(<%= word.part_of_speech.slice(0) %>) <%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></p>
+      </td>
+      <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= word.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
       <% if word.favorite %>
         <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
       <% else %>
@@ -103,19 +107,18 @@
       <% else %>
         <td class="align-middle"><%= link_to "忘", "/words/#{word.id}/forgot", method: :post, class: "forgot_btn" %></td>
       <% end %>
-      <td class="align-middle"><p>(<%= word.part_of_speech.slice(0) %>)</p></td>
-      <td class="align-middle word">
-        <p class='word_<%= word.id %>'><%= best_in_place word, :word, :as => :input, :html_attrs => { size: 5 } %></p>
-        <p class="word-mean"><%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></p>
-      </td>
-      <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= word.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
-      <td class="align-middle">
+      <td class="align-middle hide_btn">
         <%= link_to word_path(id: word.id) , method: :delete, data: {confirm: "本当に削除しますか？"} do %>
           <i class="fas fa-trash-alt" style="color: black;"></i>
         <% end %>
       </td>
-      <td class="align-middle"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i>
+      <td class="align-middle hide_btn"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i>
       </a></td>
+      <td class="align-middle mix_btn">
+        <button type="button" class="filter-btn" onfocus="this.blur();">
+        <i class="fas fa-ellipsis-h" style="color: black"></i>
+        </button>
+      </td>
     </tr>
     <% end %>
   </tbody>
