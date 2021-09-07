@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_07_032610) do
+ActiveRecord::Schema.define(version: 2021_09_07_055543) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 2021_09_07_032610) do
     t.boolean "favorite", default: false, null: false
     t.integer "wrong_number", default: 0
     t.integer "count", default: 0
+    t.integer "favorite_count", default: 0
+    t.integer "forgot_count", default: 0
     t.index ["deleted_at"], name: "index_words_on_deleted_at"
   end
 

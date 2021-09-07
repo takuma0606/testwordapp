@@ -68,13 +68,14 @@ class WordsController < ApplicationController
   # 覚えたボタン
   def learned
     word = Word.find(params[:id])
-    word.update(wrong_number: 0)
+    word.update(wrong_number: 0, count: 0)
     word.destroy
   end
 
   # 忘れたボタン
   def forgot
-    Word.only_deleted.find(params[:id]).restore
+    word = Word.only_deleted.find(params[:id])
+    word.restore
   end
 
   
@@ -143,10 +144,11 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(:forgot_count).first
       unless @random      
         redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
       else
+        @random.update(forgot_count: @random.forgot_count + 1)
         choices(choices2[0])
         gon.learned = true
         render 'test'
@@ -158,10 +160,11 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(:favorite_count).first
       unless @random      
         redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするにはお気に入り登録をしてください" }
       else
+        @random.update(favorite_count: @random.favorite_count + 1)
         choices(choices2[0])
         gon.favorite = true
         render 'test'
@@ -218,7 +221,7 @@ class WordsController < ApplicationController
   # お気に入り解除
   def unfavorite
     word = Word.with_deleted.find(params[:id])
-    word.update(favorite: false)
+    word.update(favorite: false, favorite_count: 0)
   end
 
   # お気に入り登録
