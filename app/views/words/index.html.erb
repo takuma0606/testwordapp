@@ -103,9 +103,17 @@
         <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
       <% end %>
       <% if word.deleted_at == nil %>
-        <td class="align-middle"><%= link_to "覚", "/words/#{word.id}/learned", method: :post, class: "forgot_btn" %></td>
+        <td class="align-middle">
+          <%= link_to "/words/#{word.id}/learned", method: :post, class: "forgot_btn" do %>
+            <i class="fas fa-check-circle fa-lg" style="color: #C0C0C0"></i>
+          <% end %>
+        </td>
       <% else %>
-        <td class="align-middle"><%= link_to "忘", "/words/#{word.id}/forgot", method: :post, class: "forgot_btn" %></td>
+        <td class="align-middle">
+          <%= link_to "/words/#{word.id}/forgot", method: :post, class: "forgot_btn" do %>
+            <i class="fas fa-check-circle fa-lg" style="color: #8EB8FF" ></i>
+          <% end %>
+        </td>
       <% end %>
       <td class="align-middle hide_btn">
         <%= link_to word_path(id: word.id) , method: :delete, data: {confirm: "本当に削除しますか？"} do %>
