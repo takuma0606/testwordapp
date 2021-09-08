@@ -20,14 +20,16 @@ class WordsController < ApplicationController
     if params[:search].present?
     # 検索フォームからアクセスした時の処理
       search = Word.search(@current_user.id,params[:search])
-      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
-        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:favorited]
-        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:learned]
-        @words = search.with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot]
-        @words = search.with_deleted.order(deleted_at: :desc)
+      if params[:learned_and_forgot] 
+        if params[:favorited] && params[:learned]
+          @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
+        elsif params[:favorited]
+          @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
+        elsif params[:learned]
+          @words = search.with_deleted.order(deleted_at: :desc)
+        else
+          @words = search.with_deleted.order(deleted_at: :desc)
+        end
       elsif params[:learned] && params[:favorited]
         @words = search.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]

@@ -4,6 +4,7 @@ $(function() {
     const uttr = new SpeechSynthesisUtterance();
     uttr.text = q_word;
     uttr.lang = "en-US";
+    speechSynthesis.cancel();
     speechSynthesis.speak(uttr);
   });
 });
@@ -15,6 +16,7 @@ $(function() {
     var uttr = new SpeechSynthesisUtterance();
     uttr.text = word;
     uttr.lang = "en-US";
+    speechSynthesis.cancel();
     speechSynthesis.speak(uttr);
   });
 });

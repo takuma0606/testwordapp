@@ -382,6 +382,38 @@ td.mix_btn {
   display: none;
 }
 
+.modal_delete_search .modal-dialog {
+  justify-content: center;
+}
+
+.modal_delete_search .modal-content {
+  width: 200px;
+}
+
+.modal_delete_search .modal-body {
+  position: relative;
+  height: 100px;
+}
+
+.modal_delete_search .modal-body a:first-child {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+}
+
+.modal_delete_search .modal-body p {
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  font-size: 50px;
+}
+
+.modal_delete_search .modal-body a:last-child {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+}
+
 @media screen and (max-width: 450px) {
   .m-body {
     font-size: 0.875rem;

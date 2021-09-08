@@ -120,13 +120,30 @@
           <i class="fas fa-trash-alt" style="color: black;"></i>
         <% end %>
       </td>
-      <td class="align-middle hide_btn"><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i>
-      </a></td>
+      <td class="align-middle hide_btn">
+        <a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i></a>
+      </td>
       <td class="align-middle mix_btn">
-        <button type="button" class="filter-btn" onfocus="this.blur();">
-        <i class="fas fa-ellipsis-h" style="color: black"></i>
+        <button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal_delete_search_<%= word.id %>">
+          <i class="fas fa-ellipsis-h" style="color: black"></i>
         </button>
       </td>
+      <div class="modal fade modal_delete_search" id="modal_delete_search_<%= word.id %>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <%= link_to word_path(id: word.id) , method: :delete, data: {confirm: "本当に削除しますか？"} do %>
+                <i class="fas fa-trash-alt fa-2x" style="color: black;"></i>
+              <% end %>
+              <p>/</p>
+              <a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search fa-2x" style="color: black;"></i></a>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </tr>
     <% end %>
   </tbody>
@@ -139,7 +156,7 @@
             <div class="modal-body">チェックしたデータを一括削除しますか？</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <%= f.submit "OK", class: " btn btn-primary" %>
+                <%= f.submit "OK", class: "btn btn-primary" %>
             </div>
         </div>
     </div>
