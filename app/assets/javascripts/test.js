@@ -1,8 +1,8 @@
 $(function() {
     $('.quiz_area').on('click', '.word_mean', function(){
         $('.quiz_area').find('.quiz_area_bg').show();
-        var judge = $(this).text();
-        var question = $('p.q_word').text();
+        const judge = $(this).text();
+        const question = $('p.q_word').text();
         const parent = this;
 
         $.ajax({

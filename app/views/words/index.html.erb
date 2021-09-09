@@ -94,7 +94,7 @@
       <td class="align-middle"><%= f.check_box :deletes, { multiple: true }, checked_value = word.id, unchecked_value = nil %></td>
       <td class="align-middle word">
         <p class='word_<%= word.id %>'><%= best_in_place word, :word, :as => :input, :html_attrs => { size: 5 } %></p>
-        <p class="word-mean">(<%= word.part_of_speech.slice(0) %>) <%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></p>
+        <p class="word-mean">(<%= word.part_of_speech.slice(0) %>) <span><%= best_in_place word, :meaning, :as => :input, :html_attrs => { size: 15 } %></span></p>
       </td>
       <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= word.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
       <% if word.favorite %>
