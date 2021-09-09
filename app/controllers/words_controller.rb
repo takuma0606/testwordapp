@@ -21,12 +21,8 @@ class WordsController < ApplicationController
     # 検索フォームからアクセスした時の処理
       search = Word.search(@current_user.id,params[:search])
       if params[:learned_and_forgot] 
-        if params[:favorited] && params[:learned]
+        if (params[:favorited] && params[:learned]) || params[:favorited]
           @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-        elsif params[:favorited]
-          @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-        elsif params[:learned]
-          @words = search.with_deleted.order(deleted_at: :desc)
         else
           @words = search.with_deleted.order(deleted_at: :desc)
         end
@@ -42,14 +38,12 @@ class WordsController < ApplicationController
     else
     # 検索フォーム以外からアクセスした時の処理
       nonsearch = Word.nonsearch(@current_user.id)
-      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
-        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:favorited]
-        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:learned]
-        @words = nonsearch.with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot]
-        @words = nonsearch.with_deleted.order(deleted_at: :desc)
+      if params[:learned_and_forgot] 
+        if (params[:favorited] && params[:learned]) || params[:favorited]
+          @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
+        else
+          @words = nonsearch.with_deleted.order(deleted_at: :desc)
+        end
       elsif params[:learned] && params[:favorited]
         @words = nonsearch.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]
@@ -83,10 +77,12 @@ class WordsController < ApplicationController
   
 
   def destroy_all
-    if params[:deletes] != nil
+    if params[:deletes]
       params[:deletes].each do |data|
         Word.with_deleted.find(data).really_destroy!
       end
+      redirect_to request.referer
+    else 
       redirect_to request.referer
     end
   end
@@ -131,7 +127,6 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-
       @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(:count).first
       unless @random      
         redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするには単語を登録してください" }
@@ -199,9 +194,8 @@ class WordsController < ApplicationController
     end
   end
 
-  # 以下ajaxを用いた
   def judge
-    question = Word.with_deleted.find_by(user_id: @current_user.id, word: params[:question])
+    question = Word.with_deleted.find(params[:question_id])
     q_meaning = question.meaning
     q_id = question.id
     if q_meaning == params[:answer]
