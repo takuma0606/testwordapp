@@ -25,7 +25,7 @@
       
       <div class="pull_down"><%= f.select :part_of_speech, options_for_select([["動詞", "動詞"],["名詞", "名詞"],["副詞", "副詞"],["形容詞", "形容詞"],["熟語", "熟語"]], params[:part_of_speech]) %></div>
       <%= f.hidden_field :user_id, :value => @current_user.id %>
-      <div class="create_button"><%= f.submit 'CREATE', :class => 'new_word_submit' %></div>
+      <div class="create_button"><%= f.submit 'CREATE', :class => 'btn btn--orange btn--cubic btn--shadow create', :onfocus => "this.blur();" %></div>
     <% end %>
   </div>
 </div>

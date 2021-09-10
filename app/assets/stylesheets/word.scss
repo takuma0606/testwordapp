@@ -240,18 +240,35 @@ a:focus {
   margin-bottom: 50px;
 }
 
-.new_word_submit {
-  margin: 30px;
-  background-color: #e27441;
-  border-color: rgb(240, 147, 104);
-  border-bottom: 2px solid #be783f;
-  border-right: 2px solid #c77e43;
+.create_button {
+  height: 50px;
+}
+
+.btn--orange {
+  width: 100px;
   color: #fff;
-  font-family: Raleway, sans-serif;
-  cursor: pointer;
-  letter-spacing: 2px;
-  line-height: 24px;
-  padding: 8px 16px;
+  outline: none;
+}
+.btn--orange:hover {
+  margin-top: 3px;
+  color: #fff;
+}
+.btn--orange:focus {
+  outline: none;
+}
+.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.create {
+  background-color: #f09041;
+  border-bottom: 5px solid #af1f1f;
+}
+
+.create:hover {
+  background: #f09041;
+  border-bottom: 2px solid #c96931;
 }
 
 @media screen and (max-width: 600px) {
@@ -589,17 +606,20 @@ td.mix_btn {
   padding-top: 40px;
 }
 
-.banner {
-  width: 100%;
-  background-color: rgb(253, 158, 158);
-  height: 40px;
+.alert {
+  width: 90%;
+  height: 60px;
   text-align: center;
+  margin: 4px auto 0;
+  padding: 12px 100px;
+  position: relative;
 }
 
-.banner p {
-  display: inline;
-  vertical-align: middle;
-  margin: 0;
+.alert .close {
+  position: absolute;
+  bottom: 40%;
+  right: 2%;
+  outline: none;
 }
 
 .select_box {
@@ -693,5 +713,8 @@ td.mix_btn {
   }
   .balloon {
     width: 270px;
+  }
+  .alert {
+    font-size: 0.875rem;
   }
 }

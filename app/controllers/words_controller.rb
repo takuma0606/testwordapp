@@ -129,7 +129,7 @@ class WordsController < ApplicationController
     else
       @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(:count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするには単語を登録してください" }
+        redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
         @random.update(count: @random.count + 1)
         choices(choices2[0])
@@ -143,7 +143,7 @@ class WordsController < ApplicationController
     else
       @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(:forgot_count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
+        redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
         @random.update(forgot_count: @random.forgot_count + 1)
         choices(choices2[0])
@@ -159,7 +159,7 @@ class WordsController < ApplicationController
     else
       @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(:favorite_count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするにはお気に入り登録をしてください" }
+        redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
         @random.update(favorite_count: @random.favorite_count + 1)
         choices(choices2[0])
@@ -175,7 +175,7 @@ class WordsController < ApplicationController
     else
       @random = Word.where(user_id: @current_user.id, part_of_speech: choices2[0], wrong_number: 2..Float::INFINITY).where.not(word: choices2[1]).order(wrong_number: "DESC").first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "間違えやすい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
+        redirect_to choice_test_words_path, flash: {error: "間違えやすい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
         choices(choices2[0])
         gon.wrong = true
@@ -209,7 +209,7 @@ class WordsController < ApplicationController
         question.update(wrong_number: question.wrong_number + 1)
       end
     end
-    Result.create(answer: params[:answer], solution: q_meaning, user_id: @current_user.id, q_word: params[:question], q_id: q_id)
+    Result.create(answer: params[:answer], solution: q_meaning, user_id: @current_user.id, q_word: question.word, q_id: q_id)
     test['ans'] = q_meaning
     render :json => test
   end

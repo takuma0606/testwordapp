@@ -1,6 +1,11 @@
 <% model_reset %>
 <div class="choice_area">
-<div class="banner"><p>お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするにはお気に入り登録をしてください</p></div>
+  <% if flash[:error] %>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:error] %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  <% end %>
   <div class="select_box">
     <div id="select_area">
       <div class="choice_test_box">
