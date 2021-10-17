@@ -21,18 +21,14 @@
 
       <% if Word.exists?(id: result.q_id) %>
         <td class="align-middle" style="width: 5%;">
-          <%= link_to "/words/#{result.q_id}/learned", {method: :post, class: "learned_btn_result"} do %>
-          <i class="fas fa-check-circle fa-lg" style="color: #C0C0C0"></i>
-          <% end %>
+          <div class=<%= result.q_id %>><i class="fas fa-check-circle fa-lg learned_btn_result" style="color: #C0C0C0"></i></div>
         </td>
       <% else %>
         <td class="align-middle" style="width: 5%;">
-          <%= link_to "/words/#{result.q_id}/forgot", {method: :post, class: "forgot_btn_result"} do %>
-          <i class="fas fa-check-circle fa-lg" style="color: #8EB8FF" ></i>
-          <% end %>
+          <div class=<%= result.q_id %>><i class="fas fa-check-circle fa-lg forgot_btn_result" style="color: #8EB8FF"></i></div>
         </td> 
       <% end %>
-
+      
       <td class="align-middle word" style="width: 70%;">
         <p class='q_word word_<%= result.id %>'><%= result.q_word %></p>
         <p class="word-mean"><%= result.solution %></p>

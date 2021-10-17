@@ -391,8 +391,8 @@ a:focus {
   cursor: pointer;
 }
 
-.forgot_btn {
-  color: black;
+.fa-check-circle {
+  cursor: pointer;
 }
 
 td.mix_btn {
@@ -560,11 +560,6 @@ td.mix_btn {
 .back_index {
   text-align: center;
   width: 100%;
-}
-
-.learned_btn_result,
-.forgot_btn_result {
-  color: black;
 }
 
 .link_index {

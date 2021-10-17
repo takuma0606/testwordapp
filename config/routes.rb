@@ -17,8 +17,6 @@ Rails.application.routes.draw do
       post :onfavorite
       post :unfavorite
       delete :destroy_all
-    end
-    member do
       post :learned
       post :forgot
     end
