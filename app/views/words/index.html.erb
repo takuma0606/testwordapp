@@ -45,7 +45,8 @@
 
 <button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal4">
 <span class="fa-stack">
-  <i class="far fa-question-circle fa-lg"></i>
+  <i class="far fa-square fa-stack-2x"></i>
+  <i class="fas fa-question"></i>
 </span>
 </button>
 
@@ -68,11 +69,13 @@
   </div>
 </div>
 
-<div id="narrow-down-search">
-<input type="text" id="search-field" placeholder="search">
-<input type="button" value="&#xf002;" id="narrow-down">
+<div class="search-box">
+  <input type="text" class="search-txt" placeholder="  search">
+  <input type="button" value="&#xf002;" class="search-btn fas" >
 </div>
 </div>
+
+
 
 <%= form_with url: destroy_all_words_path, method: :delete, local: true do |f| %>
 <div class="table-area">

@@ -308,7 +308,7 @@ a:focus {
 
 .index-header {
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto 10px;
 }
 
 .index-area form {
@@ -369,20 +369,44 @@ a:focus {
 
 .filter-btn {
   margin-top: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   padding: 0;
 }
 
-#narrow-down-search {
+.search-box {
   float: right;
+  background: #ffffff;
+  height: 50px;
+  border-radius: 50px;
+  padding: 10px;
+  width: 250px;
+  margin: 0 auto;
+  border: 1px solid #000;
+}
+.search-btn {
+  float: right;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
   display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
-#narrow-down {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
+.search-btn {
+  border: none;
+  color: #a1a1a1;
+}
+.search-txt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: #000000;
+  font-size: 16px;
+  line-height: 30px;
 }
 
 .yellow {
@@ -435,14 +459,14 @@ td.mix_btn {
   right: 20%;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 520px) {
   .m-body {
     font-size: 0.875rem;
   }
   .modal-body form {
     width: 90%;
   }
-  #narrow-down-search {
+  .search-box {
     float: none;
     justify-content: center;
   }
