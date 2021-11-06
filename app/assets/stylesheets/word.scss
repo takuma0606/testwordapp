@@ -322,6 +322,10 @@ a:focus {
   overflow-y: scroll;
 }
 
+.index_table td {
+  border-top: 2px solid #dee2e6 !important;
+}
+
 .index_table thead {
   position: sticky;
   top: 0;
@@ -442,11 +446,14 @@ td.mix_btn {
     float: none;
     justify-content: center;
   }
+  th.hide {
+    display: none;
+  }
   td.hide_btn {
     display: none;
   }
   td.mix_btn {
-    display: block;
+    display: table-cell;
   }
   .index_table tr th:last-child {
     display: none;
