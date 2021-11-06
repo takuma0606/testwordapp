@@ -1,12 +1,12 @@
 <% model_reset %>
 <div class="choice_area">
-
+  <% if flash[:error] %>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:error] %>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  <% end %>
   <div class="select_box">
-    <div class="news">
-      <i class="fas fa-bullhorn"></i>
-      <p class="balloon">単語を5つ登録するとテストができます。</p>
-    </div>
-
     <div id="select_area">
       <div class="choice_test_box">
       <div><a href="#" class="btn-animation-02"><span>覚えてない単語<span></a></div>

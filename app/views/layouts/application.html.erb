@@ -32,22 +32,39 @@
     <header>
     <div id="header" class="wrapper">
       <% if @current_user == nil %>
-      <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
-      <ul class="right_nav">
-        <li><%= link_to "Signup", "/signup"  %></li>
-        <li><%= link_to "Login", "/login"  %></li>
-      </ul>
+        <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
+        <ul class="right_nav">
+          <li><%= link_to "Signup", "/signup"  %></li>
+          <li><%= link_to "Login", "/login"  %></li>
+        </ul>
       <% else %>
-      <ul class="left_nav">
-        <li><%= link_to "Create", new_word_path %></li>
-        <li><%= link_to "Index", words_path %></li>
-        <li><%= link_to "Test", choice_test_words_path %></li>
-      </ul>
-      <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
-      <ul class="right_nav">
-        <li>User：<%= @current_user.name  %></li>
-        <li><%= link_to "Logout", "/logout", method: :post  %></li>
-      </ul>
+        <ul class="left_nav">
+          <li><%= link_to "Create", new_word_path %></li>
+          <li><%= link_to "Index", words_path %></li>
+          <li><%= link_to "Test", choice_test_words_path %></li>
+        </ul>
+        <div id="site-title"><%= link_to "Word Test" ,"/" %></div>
+        <ul class="right_nav">
+          <li>User：<%= @current_user.name  %></li>
+          <li><%= link_to "Logout", "/logout", method: :post  %></li>
+        </ul>
+        <nav id="navi">
+          <ul class="nav-menu">
+            <li>・<%= link_to "Create", new_word_path %></li>
+            <li>・<%= link_to "Index", words_path %></li>
+            <li>・<%= link_to "Test", choice_test_words_path %></li>
+            <li>・User：<%= @current_user.name  %></li>
+            <li>・<%= link_to "Logout", "/logout", method: :post  %></li>
+          </ul>
+        </nav>
+
+        <div class="toggle_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+
+        <div id="mask"></div>
       <% end %>
     </div>
     </header>

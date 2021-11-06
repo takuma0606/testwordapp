@@ -47,10 +47,14 @@ a.btn--orange {
   width: 200px;
   color: #fff;
   outline: none;
+  background-color: #f09041;
+  border-bottom: 5px solid #c96931;
 }
 a.btn--orange:hover {
   margin-top: 3px;
   color: #fff;
+  background: #f09041;
+  border-bottom: 2px solid #c96931;
 }
 a.btn--orange:focus {
   outline: none;
@@ -58,35 +62,6 @@ a.btn--orange:focus {
 a.btn--shadow {
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-}
-
-a.create {
-  background-color: #ec4c4c;
-  border-bottom: 5px solid #af1f1f;
-}
-
-a.create:hover {
-  background: #ec4c4c;
-  border-bottom: 2px solid #af1f1f;
-}
-
-a.index {
-  background-color: #4db94d;
-  border-bottom: 5px solid #277738;
-}
-
-a.index:hover {
-  background: #4db94d;
-  border-bottom: 2px solid #277738;
-}
-a.test {
-  background-color: #5e5ee4;
-  border-bottom: 5px solid #3f4492;
-}
-
-a.test:hover {
-  background: #5e5ee4;
-  border-bottom: 2px solid #3f4492;
 }
 
 @media screen and (max-width: 700px) {

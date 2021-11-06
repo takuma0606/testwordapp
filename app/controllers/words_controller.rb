@@ -20,14 +20,12 @@ class WordsController < ApplicationController
     if params[:search].present?
     # 検索フォームからアクセスした時の処理
       search = Word.search(@current_user.id,params[:search])
-      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
-        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:favorited]
-        @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:learned]
-        @words = search.with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot]
-        @words = search.with_deleted.order(deleted_at: :desc)
+      if params[:learned_and_forgot] 
+        if (params[:favorited] && params[:learned]) || params[:favorited]
+          @words = search.where(favorite: true).with_deleted.order(deleted_at: :desc)
+        else
+          @words = search.with_deleted.order(deleted_at: :desc)
+        end
       elsif params[:learned] && params[:favorited]
         @words = search.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]
@@ -40,14 +38,12 @@ class WordsController < ApplicationController
     else
     # 検索フォーム以外からアクセスした時の処理
       nonsearch = Word.nonsearch(@current_user.id)
-      if params[:learned_and_forgot] && params[:favorited] && params[:learned]
-        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:favorited]
-        @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot] && params[:learned]
-        @words = nonsearch.with_deleted.order(deleted_at: :desc)
-      elsif params[:learned_and_forgot]
-        @words = nonsearch.with_deleted.order(deleted_at: :desc)
+      if params[:learned_and_forgot] 
+        if (params[:favorited] && params[:learned]) || params[:favorited]
+          @words = nonsearch.where(favorite: true).with_deleted.order(deleted_at: :desc)
+        else
+          @words = nonsearch.with_deleted.order(deleted_at: :desc)
+        end
       elsif params[:learned] && params[:favorited]
         @words = nonsearch.where(favorite: true).only_deleted.order(deleted_at: :desc)
       elsif params[:learned]
@@ -68,22 +64,25 @@ class WordsController < ApplicationController
   # 覚えたボタン
   def learned
     word = Word.find(params[:id])
-    word.update(wrong_number: 0)
+    word.update(wrong_number: 0, count: 0)
     word.destroy
   end
 
   # 忘れたボタン
   def forgot
-    Word.only_deleted.find(params[:id]).restore
+    word = Word.only_deleted.find(params[:id])
+    word.restore
   end
 
   
 
   def destroy_all
-    if params[:deletes] != nil
+    if params[:deletes]
       params[:deletes].each do |data|
         Word.with_deleted.find(data).really_destroy!
       end
+      redirect_to request.referer
+    else 
       redirect_to request.referer
     end
   end
@@ -128,10 +127,9 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-
       @random = Word.search(@current_user.id,choices2[0]).where.not(word: choices2[1]).order(:count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするには単語を登録してください" }
+        redirect_to choice_test_words_path, flash: {error: "覚えたい単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
         @random.update(count: @random.count + 1)
         choices(choices2[0])
@@ -143,10 +141,11 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      @random = Word.only_deleted.where(user_id: @current_user.id, part_of_speech: choices2[0]).where.not(word: choices2[1]).order(:forgot_count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。" }
+        redirect_to choice_test_words_path, flash: {error: "覚えた単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
+        @random.update(forgot_count: @random.forgot_count + 1)
         choices(choices2[0])
         gon.learned = true
         render 'test'
@@ -158,10 +157,11 @@ class WordsController < ApplicationController
     unless request.referer
       redirect_to "/"
     else
-      @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(Arel.sql("RANDOM()")).first
+      @random = Word.search(@current_user.id,choices2[0]).where(favorite: true).where.not(word: choices2[1]).order(:favorite_count).first
       unless @random      
-        redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました。再びテストをするにはお気に入り登録をしてください" }
+        redirect_to choice_test_words_path, flash: {error: "お気に入りにした単語(品詞：#{choices2[0]})の数が5つ未満になったためテストを中断しました" }
       else
+        @random.update(favorite_count: @random.favorite_count + 1)
         choices(choices2[0])
         gon.favorite = true
         render 'test'
@@ -194,9 +194,8 @@ class WordsController < ApplicationController
     end
   end
 
-  # 以下ajaxを用いた
   def judge
-    question = Word.with_deleted.find_by(user_id: @current_user.id, word: params[:question])
+    question = Word.with_deleted.find(params[:question_id])
     q_meaning = question.meaning
     q_id = question.id
     if q_meaning == params[:answer]
@@ -210,7 +209,7 @@ class WordsController < ApplicationController
         question.update(wrong_number: question.wrong_number + 1)
       end
     end
-    Result.create(answer: params[:answer], solution: q_meaning, user_id: @current_user.id, q_word: params[:question], q_id: q_id)
+    Result.create(answer: params[:answer], solution: q_meaning, user_id: @current_user.id, q_word: question.word, q_id: q_id)
     test['ans'] = q_meaning
     render :json => test
   end
@@ -218,7 +217,7 @@ class WordsController < ApplicationController
   # お気に入り解除
   def unfavorite
     word = Word.with_deleted.find(params[:id])
-    word.update(favorite: false)
+    word.update(favorite: false, favorite_count: 0)
   end
 
   # お気に入り登録

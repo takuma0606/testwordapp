@@ -240,18 +240,35 @@ a:focus {
   margin-bottom: 50px;
 }
 
-.new_word_submit {
-  margin: 30px;
-  background-color: #e27441;
-  border-color: rgb(240, 147, 104);
-  border-bottom: 2px solid #be783f;
-  border-right: 2px solid #c77e43;
+.create_button {
+  height: 50px;
+}
+
+.btn--orange {
+  width: 100px;
   color: #fff;
-  font-family: Raleway, sans-serif;
-  cursor: pointer;
-  letter-spacing: 2px;
-  line-height: 24px;
-  padding: 8px 16px;
+  outline: none;
+}
+.btn--orange:hover {
+  margin-top: 3px;
+  color: #fff;
+}
+.btn--orange:focus {
+  outline: none;
+}
+.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.create {
+  background-color: #f09041;
+  border-bottom: 5px solid #af1f1f;
+}
+
+.create:hover {
+  background: #f09041;
+  border-bottom: 2px solid #c96931;
 }
 
 @media screen and (max-width: 600px) {
@@ -374,16 +391,65 @@ a:focus {
   cursor: pointer;
 }
 
+.fa-check-circle {
+  cursor: pointer;
+}
+
+td.mix_btn {
+  display: none;
+}
+
+.modal_delete_search .modal-dialog {
+  justify-content: center;
+}
+
+.modal_delete_search .modal-content {
+  width: 200px;
+}
+
+.modal_delete_search .modal-body {
+  position: relative;
+  height: 100px;
+}
+
+.modal_delete_search .modal-body a:first-child {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+}
+
+.modal_delete_search .modal-body p {
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  font-size: 50px;
+}
+
+.modal_delete_search .modal-body a:last-child {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+}
+
 @media screen and (max-width: 450px) {
-  #search-field {
-    display: inline-block;
-    width: 130px;
-  }
   .m-body {
     font-size: 0.875rem;
   }
   .modal-body form {
     width: 90%;
+  }
+  #narrow-down-search {
+    float: none;
+    justify-content: center;
+  }
+  td.hide_btn {
+    display: none;
+  }
+  td.mix_btn {
+    display: block;
+  }
+  .index_table tr th:last-child {
+    display: none;
   }
 }
 
@@ -532,61 +598,32 @@ a:focus {
   position: relative;
   width: 100%;
   min-height: 100%;
+  padding-top: 40px;
+}
+
+.alert {
+  width: 90%;
+  height: 60px;
+  text-align: center;
+  margin: 4px auto 0;
+  padding: 12px 100px;
+  position: relative;
+}
+
+.alert .close {
+  position: absolute;
+  bottom: 40%;
+  right: 2%;
+  outline: none;
 }
 
 .select_box {
   position: absolute;
-  top: 60%;
+  top: 68%;
   left: 50%;
   width: 450px;
   text-align: center;
   transform: translate(-50%, -60%);
-}
-
-.news {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.news i {
-  cursor: pointer;
-}
-
-.balloon {
-  display: none;
-  position: relative;
-  float: right;
-  width: 350px;
-  padding: 5px 0px;
-  border: solid 3px #555;
-  box-sizing: border-box;
-  margin: 0;
-  border-radius: 10px;
-}
-
-.balloon:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -24px;
-  margin-top: -12px;
-  border: 12px solid transparent;
-  border-right: 12px solid #fff;
-  z-index: 2;
-}
-
-.balloon:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -30px;
-  margin-top: -14px;
-  border: 14px solid transparent;
-  border-right: 14px solid #555;
-  z-index: 1;
 }
 
 .hinsi-box {
@@ -622,7 +659,7 @@ a:focus {
   font-size: 16px;
   padding: 10px 24px;
   font-weight: bold;
-  background-color: #e27441;
+  background-color: #fff;
   color: #e27441;
   text-decoration: none;
   border-radius: 6px;
@@ -638,8 +675,7 @@ a:focus {
 .btn-animation-02::after {
   content: "";
   display: block;
-  background-color: #fff;
-  width: 50%;
+  width: 0;
   height: 100%;
   position: absolute;
   top: 0;
@@ -647,17 +683,18 @@ a:focus {
 }
 
 .btn-animation-02::before {
-  left: 0;
+  left: 50%;
 }
 
 .btn-animation-02::after {
-  right: 0;
+  right: 50%;
 }
 
 .btn-animation-02:hover:before,
 .btn-animation-02:hover:after {
-  width: 0;
-  background-color: #fff;
+  width: 50%;
+  background-color: #e27441;
+  border: 1px solid #e27441;
 }
 
 .btn-animation-02:hover {
@@ -671,5 +708,8 @@ a:focus {
   }
   .balloon {
     width: 270px;
+  }
+  .alert {
+    font-size: 0.875rem;
   }
 }
