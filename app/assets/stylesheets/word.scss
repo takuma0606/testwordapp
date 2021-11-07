@@ -382,27 +382,22 @@ a:focus {
   width: 250px;
   margin: 0 auto;
   border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
 }
 .search-btn {
-  float: right;
   width: 30px;
   height: 30px;
   background: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-decoration: none;
-}
-
-.search-btn {
   border: none;
   color: #a1a1a1;
 }
+
 .search-txt {
   border: none;
   background: none;
   outline: none;
-  float: left;
   padding: 0;
   color: #000000;
   font-size: 16px;
@@ -468,7 +463,6 @@ td.mix_btn {
   }
   .search-box {
     float: none;
-    justify-content: center;
   }
   th.hide {
     display: none;
