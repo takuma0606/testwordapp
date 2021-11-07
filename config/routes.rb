@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get '/' => "home#top"
-  get '/vata' => "home#vata"
   get 'login' => "user#login_form"
   post "login" => "user#login"
   get 'signup' => "user#signup"

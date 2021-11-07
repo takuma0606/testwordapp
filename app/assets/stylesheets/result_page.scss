@@ -1,0 +1,132 @@
+.result-area {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
+#result_circle {
+  margin: 50px;
+  width: 250px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+// ---------------------------------------------------------------------------------------
+.btn-square-slant {
+  display: inline-block;
+  margin: 25px;
+  position: relative;
+  padding: 0.5em 1.4em;
+  text-decoration: none;
+  background: #7a837f; /*ボタン色*/
+  color: #fff;
+  border-bottom: solid 5px #3d3f3d; /*ボタン色より暗めに*/
+  border-right: solid 5px #4d534d; /*ボタン色より暗めに*/
+}
+
+.btn-square-slant:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-square-slant:before {
+  content: " ";
+  position: absolute;
+  bottom: -5px;
+  left: -1px;
+  width: 0;
+  height: 0;
+  border-width: 0 6px 6px 0px;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom-color: #fff;
+}
+
+.btn-square-slant:after {
+  content: " ";
+  position: absolute;
+  top: -1px;
+  right: -5px;
+  width: 0;
+  height: 0;
+  border-width: 0px 6px 6px 0px;
+  border-style: solid;
+  border-color: #fff;
+  border-bottom-color: transparent;
+}
+
+.btn-square-slant:active {
+  /*ボタンを押したとき*/
+  border: none;
+  -webkit-transform: translate(6px, 6px);
+  transform: translate(6px, 6px);
+}
+
+.btn-square-slant:active:after,
+.btn-square-slant:active:before {
+  content: none; /*ボタンを押すと線が消える*/
+}
+// ---------------------------------------------------------------------------------------
+
+.result_box {
+  width: 100%;
+  margin-top: 80px;
+  margin-bottom: 120px;
+  text-align: center;
+}
+
+.result_box p {
+  font-family: "Small Fonts", sans-serif;
+  font-size: 5rem;
+}
+
+.result-table p {
+  margin: 0;
+}
+
+.maru {
+  font-size: 1.5625rem;
+  font-weight: lighter;
+  color: red;
+  display: inline-block;
+}
+
+.batu {
+  font-size: 1.5625rem;
+  font-weight: bold;
+  color: blue;
+  display: inline-block;
+}
+
+.back_index {
+  text-align: center;
+  width: 100%;
+}
+
+.link_index {
+  background: rgb(243, 128, 75);
+  color: white;
+  display: block;
+  padding: 30px 0;
+  text-decoration: none;
+  transition-property: background-color;
+  -webkit-transition-property: background-color;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+}
+
+.link_index:hover {
+  background: rgb(240, 147, 104);
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 400px) {
+  .result_box p {
+    font-size: 3.75rem;
+  }
+
+  .result-table th {
+    display: none;
+  }
+}

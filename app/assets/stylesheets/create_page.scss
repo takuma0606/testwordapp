@@ -1,0 +1,113 @@
+.create_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
+.word_create {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -60%);
+  width: 500px;
+}
+
+.word_create h1 {
+  margin-bottom: 50px;
+  font-family: Raleway, sans-serif;
+  font-size: 3.1rem;
+}
+
+.create-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create_field {
+  width: 180px;
+}
+
+.text_field {
+  border: none;
+  border-bottom: 2px solid #1b2538;
+  width: 100%;
+}
+
+.text_field:focus {
+  outline: none;
+}
+
+.error_box {
+  height: 80px;
+  color: red;
+}
+
+.pull_down select {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #000000;
+  width: 180px;
+}
+
+.pull_down {
+  margin-bottom: 50px;
+}
+
+.create_button {
+  height: 50px;
+}
+
+.btn--orange {
+  width: 100px;
+  color: #fff;
+  outline: none;
+}
+.btn--orange:hover {
+  margin-top: 3px;
+  color: #fff;
+}
+.btn--orange:focus {
+  outline: none;
+}
+.btn--shadow {
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.create {
+  background-color: #f09041;
+  border-bottom: 5px solid #af1f1f;
+}
+
+.create:hover {
+  background: #f09041;
+  border-bottom: 2px solid #c96931;
+}
+
+@media screen and (max-width: 600px) {
+  .word_create {
+    width: 50%;
+  }
+
+  .create-form {
+    flex-direction: column;
+  }
+
+  .create_field {
+    width: 100%;
+  }
+
+  .error_box {
+    height: 50px;
+  }
+
+  .pull_down select {
+    width: 100%;
+  }
+
+  .new_word_submit {
+    margin: 0;
+  }
+}

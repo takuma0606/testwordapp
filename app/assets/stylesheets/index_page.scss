@@ -1,0 +1,178 @@
+.index-area {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
+.index-header {
+  width: 80%;
+  margin: 10px auto 10px;
+}
+
+.index-area form {
+  margin: 0 auto;
+  height: 90%;
+  width: 80%;
+}
+
+.table-area {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.index_table td {
+  border-top: 2px solid #dee2e6 !important;
+}
+
+.index_table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: white;
+  height: 50px;
+}
+
+.index_table thead th {
+  font-weight: lighter;
+  border-top: white;
+}
+
+.table td:not(.word) {
+  text-align: center;
+}
+
+.index_table p {
+  margin: 0;
+}
+
+.word-mean {
+  font-size: 0.75rem;
+}
+
+.modal-body p {
+  width: 100%;
+}
+
+.m-header {
+  height: 60px;
+  padding: 5px 20px;
+  font-size: 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.m-body {
+  height: 330px;
+  padding: 20px;
+}
+
+.filter-btn {
+  margin-top: 8px;
+  margin-bottom: 18px;
+  padding: 0;
+}
+
+.search-box {
+  float: right;
+  background: #ffffff;
+  height: 50px;
+  border-radius: 50px;
+  padding: 10px;
+  width: 250px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+}
+.search-btn {
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  text-decoration: none;
+  border: none;
+  color: #a1a1a1;
+  cursor: pointer;
+}
+
+.search-txt {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  color: #000000;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.yellow {
+  color: #ffff00;
+  cursor: pointer;
+}
+
+.clear {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.fa-check-circle {
+  cursor: pointer;
+}
+
+td.mix_btn {
+  display: none;
+}
+
+.modal_delete_search .modal-dialog {
+  justify-content: center;
+}
+
+.modal_delete_search .modal-content {
+  width: 200px;
+}
+
+.modal_delete_search .modal-body {
+  position: relative;
+  height: 100px;
+}
+
+.modal_delete_search .modal-body a:first-child {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+}
+
+.modal_delete_search .modal-body p {
+  position: absolute;
+  top: 5%;
+  left: 45%;
+  font-size: 50px;
+}
+
+.modal_delete_search .modal-body a:last-child {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+}
+
+@media screen and (max-width: 520px) {
+  .m-body {
+    font-size: 0.875rem;
+  }
+  .modal-body form {
+    width: 90%;
+  }
+  .search-box {
+    float: none;
+  }
+  th.hide {
+    display: none;
+  }
+  td.hide_btn {
+    display: none;
+  }
+  td.mix_btn {
+    display: table-cell;
+  }
+  .index_table tr th:last-child {
+    display: none;
+  }
+}
