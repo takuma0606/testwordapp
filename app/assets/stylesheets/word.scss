@@ -308,7 +308,7 @@ a:focus {
 
 .index-header {
   width: 80%;
-  margin: 10px auto 10px;
+  margin: 0 auto;
 }
 
 .index-area form {
@@ -320,10 +320,6 @@ a:focus {
 .table-area {
   height: 100%;
   overflow-y: scroll;
-}
-
-.index_table td {
-  border-top: 2px solid #dee2e6 !important;
 }
 
 .index_table thead {
@@ -369,39 +365,20 @@ a:focus {
 
 .filter-btn {
   margin-top: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   padding: 0;
 }
 
-.search-box {
+#narrow-down-search {
   float: right;
-  background: #ffffff;
-  height: 50px;
-  border-radius: 50px;
-  padding: 10px;
-  width: 250px;
-  margin: 0 auto;
-  border: 1px solid #000;
   display: flex;
-  justify-content: space-between;
-}
-.search-btn {
-  width: 30px;
-  height: 30px;
-  background: #ffffff;
-  text-decoration: none;
-  border: none;
-  color: #a1a1a1;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.search-txt {
-  border: none;
-  background: none;
-  outline: none;
-  padding: 0;
-  color: #000000;
-  font-size: 16px;
-  line-height: 30px;
+#narrow-down {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
 }
 
 .yellow {
@@ -454,24 +431,22 @@ td.mix_btn {
   right: 20%;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 450px) {
   .m-body {
     font-size: 0.875rem;
   }
   .modal-body form {
     width: 90%;
   }
-  .search-box {
+  #narrow-down-search {
     float: none;
-  }
-  th.hide {
-    display: none;
+    justify-content: center;
   }
   td.hide_btn {
     display: none;
   }
   td.mix_btn {
-    display: table-cell;
+    display: block;
   }
   .index_table tr th:last-child {
     display: none;

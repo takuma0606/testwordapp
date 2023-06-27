@@ -45,8 +45,7 @@
 
 <button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal4">
 <span class="fa-stack">
-  <i class="far fa-square fa-stack-2x"></i>
-  <i class="fas fa-question"></i>
+  <i class="far fa-question-circle fa-lg"></i>
 </span>
 </button>
 
@@ -69,13 +68,11 @@
   </div>
 </div>
 
-<div class="search-box">
-  <input type="text" class="search-txt" placeholder="  search">
-  <input type="button" value="&#xf002;" class="search-btn fas" >
+<div id="narrow-down-search">
+<input type="text" id="search-field" placeholder="search">
+<input type="button" value="&#xf002;" id="narrow-down">
 </div>
 </div>
-
-
 
 <%= form_with url: destroy_all_words_path, method: :delete, local: true do |f| %>
 <div class="table-area">
@@ -86,9 +83,9 @@
     <th scope="col" class="align-middle"></th>
     <th scope="col" class="align-middle" style="width: 5%;"></th>
     <th scope="col" class="align-middle" style="width: 5%;"></th>
-    <th scope="col" class="align-middle hide" style="width: 5%;"></th>
-    <th scope="col" class="align-middle hide" style="width: 5%;"></th>
-    <th scope="col" class="align-middle hide" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
+    <th scope="col" class="align-middle" style="width: 5%;"></th>
   </tr>
 </thead>
   <tbody id="boxes">
@@ -101,17 +98,17 @@
       </td>
       <td class="align-middle"><button  type="button" class="speakbtn_index" value=<%= word.id %> onfocus="this.blur();"><i class="fas fa-volume-up"></i></button></td>
       <% if word.favorite %>
-        <td class="align-middle hide_btn"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star yellow"></i></div></td>
       <% else %>
-        <td class="align-middle hide_btn"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
+        <td class="align-middle"><div class=<%= word.id %>><i class="fas fa-star clear"></i></div></td>
       <% end %>
 
       <% if word.deleted_at == nil %>
-        <td class="align-middle hide_btn">
+        <td class="align-middle">
           <div class=<%= word.id %>><i class="fas fa-check-circle fa-lg learned_btn" style="color: #C0C0C0"></i></div>
         </td>
       <% else %>
-        <td class="align-middle hide_btn">
+        <td class="align-middle">
           <div class=<%= word.id %>><i class="fas fa-check-circle fa-lg forgot_btn" style="color: #8EB8FF"></i></div>
         </td>
       <% end %>
@@ -125,27 +122,9 @@
         <a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i></a>
       </td>
       <td class="align-middle mix_btn">
-        <div class="plus" id="plus">
-          <div class="plus__line plus__line--v">
-            <% if word.favorite %>
-              <div class=<%= word.id %>><i class="fas fa-star yellow"></i></div>
-            <% else %>
-              <div class=<%= word.id %>><i class="fas fa-star clear"></i></div>
-            <% end %>
-            <% if word.deleted_at == nil %>
-              <div class=<%= word.id %>><i class="fas fa-check-circle fa-lg learned_btn" style="color: #C0C0C0"></i></div>
-            <% else %>
-              <div class=<%= word.id %>><i class="fas fa-check-circle fa-lg forgot_btn" style="color: #8EB8FF"></i></div>
-            <% end %>
-            <div>
-              <%= link_to word_path(id: word.id) , method: :delete, data: {confirm: "本当に削除しますか？"} do %>
-                <i class="fas fa-trash-alt" style="color: black;"></i>
-              <% end %>
-            </div>
-            <div><a href="https://www.google.com/search?q=<%= word.word %>" target="_blank" rel="noopener noreferrer"><i class="fas fa-search" style="color: black;"></i></a></div>
-          </div>
-          <div class="plus__line plus__line--h"></div>
-        </div>
+        <button type="button" class="filter-btn" onfocus="this.blur();" data-toggle="modal" data-target="#modal_delete_search_<%= word.id %>">
+          <i class="fas fa-ellipsis-h" style="color: black"></i>
+        </button>
       </td>
       <div class="modal fade modal_delete_search" id="modal_delete_search_<%= word.id %>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
