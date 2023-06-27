@@ -35,7 +35,8 @@ ul {
   list-style: none;
 }
 
-a {
+a,
+button {
   color: black;
 }
 
