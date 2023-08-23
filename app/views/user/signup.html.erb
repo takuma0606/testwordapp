@@ -2,6 +2,15 @@
 <main class="form-signin">
 <%= form_with model: @user, url: signup_url, local: true do |f| %>
   <h1 class="h3 mb-3 fw-normal">signup</h1>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= f.label :name, "Username" %>
   <%= f.text_field :name, :class => 'form-control', :placeholder => "Username", :value => @user.name %>
   <%= f.label :password, "Password", :class => 'visually-hidden' %>
