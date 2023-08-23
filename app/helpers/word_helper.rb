@@ -19,6 +19,7 @@ module WordHelper
         return maru_number
     end
 
+    #もう一度テストをしたとき、テスト中に別の画面に遷移した時にテストに使用するモデルのレコードを削除するアクション
     def model_reset
       List.where(user_id: @current_user.id).destroy_all 
       Result.where(user_id: @current_user.id).destroy_all 

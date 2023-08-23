@@ -249,7 +249,7 @@ a:focus {
   color: #fff;
   outline: none;
 }
-.btn--orange:hover {
+.btn--orange:active {
   margin-top: 3px;
   color: #fff;
 }
@@ -266,7 +266,7 @@ a:focus {
   border-bottom: 5px solid #af1f1f;
 }
 
-.create:hover {
+.create:active {
   background: #f09041;
   border-bottom: 2px solid #c96931;
 }
