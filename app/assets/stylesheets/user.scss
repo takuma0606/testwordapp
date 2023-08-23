@@ -9,6 +9,11 @@
   background-color: rgba(255, 255, 255, 0.445);
   background-blend-mode: lighten;
   box-sizing: border-box;
+  .alert-message {
+    color: red;
+    text-align: left;
+    margin: 0px 25px 0px;
+  }
 }
 
 .form-signin {
