@@ -236,7 +236,7 @@ DEPENDENCIES
   pg (~> 1.4)
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.5)
-  rails-i18n
+  rails-i18n (~> 5.1)
   ransack
   sass-rails
   selenium-webdriver
