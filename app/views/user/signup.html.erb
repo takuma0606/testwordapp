@@ -2,21 +2,21 @@
 <main class="form-signin">
 <%= form_with model: @user, url: signup_url, local: true do |f| %>
   <h1 class="h3 mb-3 fw-normal">signup</h1>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= f.label :name, "Username" %>
-  <% if @user.errors.any? %>
-    <p class="alert-message">※<%= @user.errors.full_messages_for(:name).first %></p>
-  <% end %>
-  <%= f.text_field :name, :class => 'form-control', :placeholder => "Username(13文字以内)", :value => @user.name %>
+  <%= f.text_field :name, :class => 'form-control', :placeholder => "Username", :value => @user.name %>
   <%= f.label :password, "Password", :class => 'visually-hidden' %>
-  <% if @user.errors.any? %>
-    <p class="alert-message">※<%= @user.errors.full_messages_for(:password).first %></p>
-  <% end %>
-  <%= f.password_field :password, :class => 'form-control', :placeholder => "Password(10文字以上)" %>
+  <%= f.password_field :password, :class => 'form-control', :placeholder => "Password" %>
   <%= f.label :password_confirmation, "Password_Confirmation", :class => 'visually-hidden' %>
-  <% if @user.errors.any? %>
-    <p class="alert-message">※<%= @user.errors.full_messages_for(:password).first %></p>
-  <% end %>
-  <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Password(10文字以上)" %>
+  <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Password" %>
   <%= f.submit 'signup', :class => 'btn btn-lg btn-primary' %>
 <% end %>
 </main>
