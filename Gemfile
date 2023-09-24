@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'gon'
 gem 'paranoia', "~> 2.2"
 gem 'best_in_place', '~> 3.0.1'
+gem 'rails-i18n'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

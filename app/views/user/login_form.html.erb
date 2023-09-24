@@ -3,7 +3,7 @@
   <%= form_with model: @user, url: login_url, local: true do |f| %>
     <h1 class="h3 mb-3 fw-normal">login</h1>
     <%= f.label :name, "Username" %>
-    <%= f.text_field :name, :class => 'form-control', :placeholder => "Username", :value => @user.name %>
+    <%= f.text_field :name, :class => 'form-control', :placeholder => "Username" %>
     <%= f.label :password, "Password", :class => 'visually-hidden' %>
     <%= f.password_field :password, :class => 'form-control', :placeholder => "Password" %>
     <%= f.submit 'login', :class => 'btn btn-lg btn-primary' %>

@@ -9,6 +9,11 @@
   background-color: rgba(255, 255, 255, 0.445);
   background-blend-mode: lighten;
   box-sizing: border-box;
+  .alert-message {
+    color: red;
+    text-align: left;
+    margin: 0px 25px 0px;
+  }
 }
 
 .form-signin {
@@ -45,7 +50,7 @@
 
 .text-center .btn {
   width: 90%;
-  margin: 30px 0px;
+  margin: 20px 0px;
 }
 
 @media screen and (max-width: 700px) {
